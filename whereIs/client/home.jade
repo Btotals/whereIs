@@ -1,25 +1,46 @@
 head
-	title my-homework
-	meta(charset='utf-8')
+	title WhereIs
+	meta(charset="utf-8")
+	link(rel="sytlesheet", type="text/css", href="stylesheets/trimming.css")
 body
-	.container
-		if currentUser
-			+header
-			+listview
-		else
-			+login
-			+register
-		if hasErr
-			+errMessage
+	+navigator
 
-template(name="header")
-	.row
-		.col-md-2.h3 Hello #{currentUser.username}
-		.col-md-4.h3 #{currentUser.profile.role}
-		.col-md-2.col-md-offset-4
-			button(class='btn btn-lg btn-danger btn-block LogOut') Log Out
+template(name="navigator")
+	nav.navbar.navbar-default
+		.container-fluid
+			.navbar-header
+				button(
+					type="button"
+					class="navbar-toggle collapsed"
+					data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1"
+				)
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand#logo-brand(href="#") 哪有
 
-template(name="errMessage")
-	.row
-		.col-md-2.h3 Error: 
-		.col-md-4.h3 #{errMessage}
+			.collapse.navbar-collapse#bs-example-navbar-collapse-1
+				//- ul.nav.navbar-nav
+				//- 	li.active
+				//- 		a(href="#")
+				form.navbar-form.navbar-left(role="search")
+					.form-group
+						input.form-control#search-input(
+							type="text"
+							placeholder="Where is..."
+						)
+					button.btn.btn-default(type="submit") Search
+				ul.nav.navbar-nav.navbar-left
+					li.active
+						a(href="#") 衣食
+					li
+						a(href="#") 住行
+					li
+						a(href="#") 学习
+					li
+						a(href="#") 其他
+				
+
+
