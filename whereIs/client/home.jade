@@ -1,7 +1,7 @@
 head
 	title WhereIs
 	meta(charset="utf-8")
-	link(rel="sytlesheet", type="text/css", href="stylesheets/trimming.css")
+
 body
 	+navigator
 
@@ -16,15 +16,12 @@ template(name="navigator")
 					data-target="#bs-example-navbar-collapse-1"
 				)
 					span.sr-only Toggle navigation
-					span.icon-bar
-					span.icon-bar
-					span.icon-bar
+					//- span.icon-bar
+					//- span.icon-bar
+					//- span.icon-bar
 				a.navbar-brand#logo-brand(href="#") 哪有
 
 			.collapse.navbar-collapse#bs-example-navbar-collapse-1
-				//- ul.nav.navbar-nav
-				//- 	li.active
-				//- 		a(href="#")
 				form.navbar-form.navbar-left(role="search")
 					.form-group
 						input.form-control#search-input(
@@ -41,6 +38,25 @@ template(name="navigator")
 						a(href="#") 学习
 					li
 						a(href="#") 其他
-				
+					if currentUser
+						li.dropdown
+							a.dropdown-toggle(
+								data-toggle="dropdown"
+								role="button"
+								aria-expanded="false"
+								href="#"
+							) #{currentUser.username}
+								span.caret
+							ul.dropdown-menu.dropdown-menu-right(role="menu")
+								li
+									a(href="#") 我的主页
+								li
+									a(href="#")	个人设置
+								li.divider
+								li
+									a(href="#") 注销
+					else
+						li
+							a(href="#") 请登录
 
 

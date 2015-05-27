@@ -1,9 +1,6 @@
 /* CSS declarations go here */
 /* Author: Btotals */
 /* Date: Sun May 24 2015 12:08:07 GMT+0800 (CST) */
-#search-input {
-	width: 30vw;
-}
 
 #logo-brand {
 	margin-left: 18vw;	/* 用于定位logo */
@@ -12,5 +9,14 @@
 #login-module {
 	margin-top: 10vh;
 	width: 370px;
+}
+
+#register-module {
+	margin-top: 3vh;
+	width: 370px;
+}
+
+a:hover {
+	text-decoration: none;
 }
 
