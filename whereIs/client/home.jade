@@ -5,58 +5,65 @@ head
 body
 	+navigator
 
-template(name="navigator")
-	nav.navbar.navbar-default
-		.container-fluid
-			.navbar-header
-				button(
-					type="button"
-					class="navbar-toggle collapsed"
-					data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1"
-				)
-					span.sr-only Toggle navigation
-					//- span.icon-bar
-					//- span.icon-bar
-					//- span.icon-bar
-				a.navbar-brand#logo-brand(href="/") 哪有
 
-			.collapse.navbar-collapse#bs-example-navbar-collapse-1
-				form.navbar-form.navbar-left(role="search")
-					.form-group
-						input.form-control#search-input(
-							type="text"
-							placeholder="Where is..."
-						)
-					button.btn.btn-default(type="submit") Search
-				ul.nav.navbar-nav.navbar-left
-					li.active
-						a(href="#") 衣食
-					li
-						a(href="#") 住行
-					li
-						a(href="#") 学习
-					li
-						a(href="#") 其他
-					if currentUser
-						li.dropdown
-							a.dropdown-toggle(
-								data-toggle="dropdown"
-								role="button"
-								aria-expanded="false"
-								href="#"
-							) #{currentUser.profile.nickname}
-								span.caret
-							ul.dropdown-menu.dropdown-menu-right(role="menu")
-								li
-									a(href="#") 我的主页
-								li
-									a(href="#")	个人设置
-								li.divider
-								li
-									a(href="/logout") 注销
-					else
-						li
-							a(href="#") 请登录
+template(name="home")
+	.container
+		.row
+			.col-md-8.col-md-offset-1
+				+newQuestions
+				+hotQuestions
+			.col-md-3
+				+ranklist
+
+template(name="newQuestions")
+	h1.text-left 最新问题
+	+question
+	+question
+	+question
+	+question
+	+question
+
+template(name="hotQuestions")
+	h1.text-left 最热问题
+	+question
+	+question
+	+question
+	+question
+	+question
+
+template(name="question")
+	.row.shift-down-1vh
+		.col-md-2
+			img(src="images/u10.png")
+		.col-md-4
+			span.h5 大学城哪里可以吃到山西小米<br>
+			span.h6 发布于：2015.5.22 
+			span.h6.shift-left-1vw 悬赏分数：0
+		.col-md-4.col-md-offset-2
+			span 4人参与了回答
+
+template(name="ranklist")
+	.row
+		.col-md-6.h4.text-center 
+			span.label.label-primary 周百事通
+		.col-md-6.h4.text-center
+			span.label.label-default 月百事通
+	.row
+		+ranker
+		+ranker
+		+ranker
+		+ranker
+		+ranker
+
+template(name="ranker")
+	.shift-down-1vh
+		.row
+			.col-md-4.h2.text-center 1
+			.col-md-4
+				img(src="images/u66.png")
+			.col-md-4
+				span.h5 黑猫警长<br>
+				span.h6 积分：1000
+
 
 

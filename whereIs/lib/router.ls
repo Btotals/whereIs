@@ -3,7 +3,8 @@
 
 
 Router.route '/', !->
-	if Meteor.user! then @.render 'home', {} else @.render 'login', {}
+	# if Meteor.user! then @.render 'home', {} else @.render 'login', {}
+	@.render 'home'
 
 Router.route '/login', !->
 	@.render 'login', {}

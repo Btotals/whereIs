@@ -23,3 +23,12 @@ a:hover {
 .shift-down-5vh {
 	margin-top: 5vh;
 }
+
+.shift-down-1vh {
+	margin-top: 1vh;
+}
+
+.shift-left-1vw {
+	margin-left: 1vw;
+}
+
