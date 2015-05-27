@@ -7,14 +7,14 @@ template(name="register")
 				h1.text-center.login-title 注册
 				.signup-wall
 					form.form-signin#register-module(action='/signup', method='POST')
-						input(type='text', name='email', id = 'email', class='form-control', placeholder='邮箱',required, autofocus)
-						input(type='text', name='nickname', id = 'nickname', class='form-control', placeholder='昵称', required)
-						input(type='password', name='password', id = 'password', class='form-control', placeholder='密码', required)
+						input(type='text', name='email', id = 'email', class='form-control', placeholder='Email',required, autofocus)
+						input(type='password', name='password', id = 'password', class='form-control', placeholder='Password', required)
+						input(type='text', name='nickname', id = 'nickname', class='form-control', placeholder='Nickname', required)
 						.row
 							.col-md-6
-								button(class='btn btn-lg btn-primary btn-block Register') 注册
+								button(class='btn btn-lg btn-primary btn-block Register') Register
 							.col-md-6
 								a(href="/login")
-									button(class='btn btn-lg btn-warning btn-block SignIn') 去登录！
+									button(class='btn btn-lg btn-warning btn-block SignIn') Return to Sign in
 						span.clearfix
 

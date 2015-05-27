@@ -11,5 +11,5 @@ Template.register.events {
 
 		Accounts.create-user {email: email, password: password, profile: {nickname: nickname}}, (err)->
 			if err then console.log err
-			else console.log 'success'
+			else Router.go '/profile'
 }

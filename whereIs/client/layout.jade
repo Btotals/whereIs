@@ -1,4 +1,4 @@
-template(name="navigator")
+template(name="layout")
 	nav.navbar.navbar-default
 		.container-fluid
 			.navbar-header
@@ -12,7 +12,7 @@ template(name="navigator")
 					//- span.icon-bar
 					//- span.icon-bar
 					//- span.icon-bar
-				a.navbar-brand#logo-brand(href="#") 哪有
+				a.navbar-brand#logo-brand(href="/") 哪有
 
 			.collapse.navbar-collapse#bs-example-navbar-collapse-1
 				form.navbar-form.navbar-left(role="search")
@@ -23,7 +23,7 @@ template(name="navigator")
 						)
 					button.btn.btn-default(type="submit") Search
 				ul.nav.navbar-nav.navbar-left
-					li
+					li.active
 						a(href="#") 衣食
 					li
 						a(href="#") 住行
@@ -38,7 +38,7 @@ template(name="navigator")
 								role="button"
 								aria-expanded="false"
 								href="#"
-							) #{currentUser.username}
+							) #{currentUser.profile.nickname}
 								span.caret
 							ul.dropdown-menu.dropdown-menu-right(role="menu")
 								li
@@ -47,9 +47,8 @@ template(name="navigator")
 									a(href="#")	个人设置
 								li.divider
 								li
-									a(href="#") 注销
+									a(href="/logout") 注销
 					else
 						li
-							a(href="#") 请登录
-
-
+							a(href="/login") 请登录
+	{{> yield}}
