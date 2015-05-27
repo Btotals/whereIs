@@ -14,6 +14,11 @@ Router.route '/register', !->
 Router.route '/home', !->
 	@render 'home', {}
 
+Router.route '/logout', !->
+	Meteor.logout (err)->
+		if err then alert 'fail!'
+		else Router.go '/'
+
 Router.route '/result', !->
 	@render 'result', {}
 
