@@ -1,0 +1,34 @@
+template(name="addQuestion")
+	.container
+		.row-md-3
+			h1 添加你想问的问题
+		form
+			.row-md-6
+				div.form-group
+					textarea.form-control(rows="4" placeholder="大学城哪有...")
+			.row-md-1
+				p 标签
+			.row-md-2
+				div.form-group
+					.col-md-1
+						label.checkbox-inline
+							input(type="checkbox" value="eatCloth")
+							| 衣食
+					.col-md-1
+						label.checkbox-inline
+							input(type="checkbox" value="liveWalk")
+							| 住行
+					.col-md-1
+						label.checkbox-inline
+							input(type="checkbox" value="study")
+							| 学习
+					.col-md-1
+						label.checkbox-inline
+							input(type="checkbox" value="other")
+							| 其他
+					.col-md-8
+			.row-md-1
+				div.form-group
+					button.btn.btn-default(type="submit")提交
+
+	
