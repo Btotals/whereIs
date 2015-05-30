@@ -1,5 +1,57 @@
 template(name="profile")
 	.container
 		.row
-			p this is profile
-						span.clearfix
+			.col-md-8
+				h1 个人资料
+		.row
+			.col-md-8.col-md-offset-1
+				img(src="images/u66.png")
+				| 黑猫警长
+		.row
+			.col-md-8.col-md-offset-1
+				+table1
+		.row
+			.col-md-8
+				h1 我的问题
+			.col-md-8
+				+table1
+
+		.row
+			.col-md-8
+				h1 我答过的
+			.col-md-8
+				+table1
+template(name="table2")
+	table.table
+		thead
+			tr
+				th 标题
+				th 类别
+				th 回答数
+				th 悬赏分
+				th 有无采纳
+				th 时间
+		tbody
+			tr
+				td 找妹子
+				td 其他
+				td 10
+				td 10
+				td 无
+				td 2015-07-19
+template(name="table1")
+	table.table
+		thead
+			tr
+				th 积分
+				th 提问数
+				th 回答数
+				th 被赞数
+				th 回答被采纳率
+		tbody
+			tr
+				td 1000
+				td 10
+				td 100
+				td 100
+				td 100%
