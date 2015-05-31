@@ -22,17 +22,21 @@ Router.route '/addquestion', {name: 'addQuestion'}
 Router.route '/questiondetail/:_id', (eee) !->
 	this.render 'questionDetail', {
 		data: -> {
-			Question: Quesitions.findOne this.params._id
+			Questions: Quesitions.findOne this.params._id
 		}
 	}
 
-Router.route '/browse/:_category', (eee) !->
-	ques = Questions.find {category: this.params._category}
+Router.route '/browse/:_category/:_page', (eee) !->
+	itemPerPage = 1
+	itemMin = itemPerPage*((parseInt this.params._page)-1)
+	itemMax = itemPerPage*(parseInt this.params._page)-1
+	ques = Questions.find {category: this.params._category}, {skip: itemMin, limit: itemPerPage}
+	console.log ques
 	if ques.count! is 0
 		ques = 0
 	this.render 'browse', {
 		data: -> {
-			Question: ques
+			Questions: ques
 		}
 	}
 
@@ -40,7 +44,7 @@ Router.route '/search/:_keyword', (eee) !->
 	results = searchByKeyword this.params._keyword
 	this.render 'searchResults', {
 		data: -> {
-			Question: results
+			Questions: results
 		}
 	}
 
@@ -49,10 +53,10 @@ searchByKeyword = (keyword) ->
 
 requireLogin = (e)!->
 	if !Meteor.user!
-		alert('please login in first!');
-		Router.go('/login')
+		alert 'please login in first!'
+		Router.go '/login'
 	else
-		this.next();
+		this.next!
 
-Router.onBeforeAction(requireLogin, {only: 'profile'});
-Router.onBeforeAction(requireLogin, {only: 'addQuestion'});
+Router.onBeforeAction requireLogin, {only: 'profile'}
+Router.onBeforeAction requireLogin, {only: 'addQuestion'}

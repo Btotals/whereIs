@@ -23,14 +23,31 @@ template(name="layout")
 						)
 					button.btn.btn-default(type="submit") Search
 				ul.nav.navbar-nav.navbar-left
-					li.active
-						a(href="#") 衣食
-					li
-						a(href="#") 住行
-					li
-						a(href="#") 学习
-					li
-						a(href="#") 其他
+					if isEatCloth
+						li.active
+							a(href="/browse/eatCloth/1") 衣食
+					else
+						li
+							a(href="/browse/eatCloth/1") 衣食
+					if isLiveWalk
+						li.active
+							a(href="/browse/liveWalk/1") 住行
+					else
+						li
+							a(href="/browse/liveWalk/1") 住行
+					if isStudy
+						li.active
+							a(href="/browse/study/1") 学习
+					else
+						li
+							a(href="/browse/study/1") 学习
+					if isOther
+						li.active
+							a(href="/browse/other/1") 其他
+					else
+						li
+							a(href="/browse/other/1") 其他
+					
 					if currentUser
 						li.dropdown
 							a.dropdown-toggle(
@@ -42,9 +59,11 @@ template(name="layout")
 								span.caret
 							ul.dropdown-menu.dropdown-menu-right(role="menu")
 								li
-									a(href="#") 我的主页
+									a(href="/profile") 我的主页
 								li
-									a(href="#")	个人设置
+									a(href="#") 个人设置
+								li
+									a(href="/addquestion") 提问
 								li.divider
 								li
 									a(href="/logout") 注销
