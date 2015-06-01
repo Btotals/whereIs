@@ -1,0 +1,54 @@
+template(name="browse")
+	.container
+		.row
+			.col-md-10
+				ul#myTab.nav.nav-tabs
+					li.active
+						a(href='#solve', data-toggle='tab')
+							| 已解决
+					li
+						a(href='#answer', data-toggle='tab') 待解决
+				#myTabContent.tab-content
+					#solved.tab-pane.fade.in.active
+						+title
+						each Questions
+							{{> questionItem}}
+					#unsolved.tab-pane.fade
+						+title
+						each Questions
+							{{> questionItem}}
+
+			.col-md-3.col-md-offset-4
+				ul.pagination.center
+					li
+						a(href='#{prevPage}') «
+					li.active
+						a(href='#') 1
+					li
+						a(href='#') 2
+					li
+						a(href='#') 3
+					li
+						a(href='#') 4
+					li
+						a(href='#') 5
+					li
+						a(href='#{nextPage}') »
+
+template(name="title")
+	.row.shift-down-1vh
+		.col-md-7
+			h5.text-left 标题
+		.col-md-3
+			h5.text-center 回答数
+		.col-md-2
+			h5.text-center 发布时间
+
+template(name="questionItem")
+	.row.shift-down-1vh
+		.col-md-7
+			a(href="/") #{title}
+		.col-md-3
+			h5.text-center #{totalAsk}
+		.col-md-2
+			h5.text-center #{addTime}
