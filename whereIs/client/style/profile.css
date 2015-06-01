@@ -1,0 +1,37 @@
+.profile{
+	width:20%;
+	display: inline-block;
+	border:1px solid black;
+	padding: 15px;
+}
+.addmargintop {
+	margin-top: 100px!important;
+}
+.datas {
+	display: inline-block;
+	width: 75%;
+}
+.setwidth {
+	width: 600px!important;
+}
+.setwidth2 {
+	width: 300px!important;
+}
+h2 {
+	font-family: Arial, sans-serif;
+	color: #369;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #999;
+}
+h3 {
+	font-family: Arial, sans-serif;
+}
+.click{
+	margin:3px;
+}
+.info{
+	margin-top:6px;
+}
+th{
+	font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
+}

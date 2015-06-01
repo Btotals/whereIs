@@ -13,7 +13,7 @@ Router.route '/login', {name: 'login'}
 Router.route '/logout', !->
 	Meteor.logout (err)->
 		if err then alert 'fail!'
-		else Router.go '/'
+		Router.go '/login'
 
 Router.route '/profile', {name: 'profile'}
 
@@ -25,6 +25,8 @@ Router.route '/questiondetail/:_id', (eee) !->
 			Questions: Quesitions.findOne this.params._id
 		}
 	}
+
+Router.route '/222', {name: 'questionDetail'}
 
 Router.route '/browse/:_category/:_page', (eee) !->
 	itemPerPage = 1
@@ -58,5 +60,14 @@ requireLogin = (e)!->
 	else
 		this.next!
 
-Router.onBeforeAction requireLogin, {only: 'profile'}
+logged = (e)!->
+	if Meteor.user!
+		Router.go '/'
+	else
+		this.next!
+
+#Router.onBeforeAction requireLogin, {only: 'profile'}
 Router.onBeforeAction requireLogin, {only: 'addQuestion'}
+
+Router.onBeforeAction logged, {only: 'login'}
+Router.onBeforeAction logged, {only: 'register'}
