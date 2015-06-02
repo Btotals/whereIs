@@ -37,5 +37,5 @@ Template.layout.helpers {
 		items.splice 0, 0, ''
 		
 		items.pop!
-		return (items.join '/') is '/browse/other'
+		return (items.join '/') is '/browse/other's
 }

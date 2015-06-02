@@ -4,7 +4,17 @@ Router.configure {
 	layoutTemplate: 'layout'
 }
 
-Router.route '/', {name: 'home'}
+Router.route '/',  (eee) !->
+	top5Users = Meteor.users.find {}, {sort: {'profile.score': -1}, limit: 5}
+	top5Questions = Questions.find {}, {sort: {'totalAsk': -1}, limit: 5}
+	new5Questions = Questions.find {}, {sort: {'addTime': -1}, limit: 5}
+	this.render 'home', {
+		data: -> {
+			Users: top5Users,
+			tQuestions: top5Questions,
+			nQuestions: new5Questions
+		}
+	}
 
 Router.route '/register', {name: 'register'}
 
@@ -15,7 +25,12 @@ Router.route '/logout', !->
 		if err then alert 'fail!'
 		Router.go '/login'
 
-Router.route '/profile', {name: 'profile'}
+Router.route '/profile/:_id', (eee) !->
+	this.render 'profile', {
+		data: -> {
+			User: Meteor.users.findOne this.params._id
+		}
+	}
 
 Router.route '/addquestion', {name: 'addQuestion'}
 

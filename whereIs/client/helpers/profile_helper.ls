@@ -4,49 +4,25 @@ Template['profile'].onRendered !->
 	}
 
 Template['profile'].helpers {
-	birthdate : !->
-		if Meteor.user!
-			return Meteor.user().profile['birthdate']
+	isCurrent: !->
+		if this.User._id is Meteor.user!._id
+			return true
+		else
+			return false
 
-	nickname : !->
-		if Meteor.user!
-			return Meteor.user().profile['nickname']
+	isMale: !->
+		if this.User.profile.gender is 'male'
+			return true
+		else
+			return false
 
-	isMale : !->
-		if Meteor.user!
-			return Meteor.user().profile['gender'] is 'male'
-
-	college : !->
-		if Meteor.user!
-			return Meteor.user().profile['college']
-
-	score : !->
-		if Meteor.user!
-			return Meteor.user().profile['score']
-
-	totalLike: !->
-		if Meteor.user!
-			return Meteor.user().profile['totalLike']
-
-	totalAsk: !->
-		if Meteor.user!
-			return Meteor.user().profile['totalAsk']
-
-	totalAnswer: !->
-		if Meteor.user!
-			return Meteor.user().profile['totalAnswer']
-
-	totalBest: !->
-		if Meteor.user!
-			return Meteor.user().profile['totalBest']
 
 	bestRate: !->
-		if Meteor.user!
-			totalBest = +(Meteor.user().profile['totalBest'])
-			totalAsk = +(Meteor.user().profile['totalAsk'])
-			if totalAsk is 0
-				return '0%'
-			return (totalBest/totalAsk).toFixed(1)*100 + '%'
+		totalBest = +(this.User.profile['totalBest'])
+		totalAsk = +(this.User.profile['totalAsk'])
+		if totalAsk is 0
+			return '0%'
+		return (totalBest/totalAsk).toFixed(1)*100 + '%'
 
 }
 

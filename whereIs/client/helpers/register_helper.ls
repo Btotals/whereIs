@@ -28,9 +28,6 @@ Template.register.events {
 		nickname = t.find '#nickname' .value
 		password = t.find '#password' .value
 		email = t.find '#email' .value
-		console.log name
-		console.log password
-		console.log email
 
 		Accounts.create-user {email: email, password: password, 
 		profile: {nickname: nickname, gender:'male', birthdate: '2000-01-01', college: 'unknown', score: 0,

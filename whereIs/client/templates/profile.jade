@@ -7,7 +7,7 @@ template(name="profile")
 			.row
 				.col-md-8
 					img(src="images/u66.png")
-					| 黑猫警长
+					| #{User.profile.nickname}
 			.row
 				.col-md-8
 					table.table
@@ -21,11 +21,13 @@ template(name="profile")
 								th 回答被采纳率
 						tbody
 							tr
-								td #{score}
-								td #{totalAsk}
-								td #{totalAnswer}
-								td #{totalLike}
-								td #{totalBest}
+								td #{User.profile.score}
+								td 
+									a(href='#') #{User.profile.totalAsk}
+								td 
+									a(href='#') #{User.profile.totalAnswer}
+								td #{User.profile.totalLike}
+								td #{User.profile.totalBest}
 								td #{bestRate}
 
 		div.profile
@@ -35,11 +37,12 @@ template(name="profile")
 					p.info 性别：男
 				else
 					p.info 性别：女
-				p 生日：#{birthdate}
-				p 学校：#{college}
+				p 生日：#{User.profile.birthdate}
+				p 学校：#{User.profile.college}
 
-			button.btn.btn-primary.click(data-toggle='modal', data-target='.bs-example-modal-lg', type='button',data-placement='left') 修改个人信息
-			button.btn.btn-primary.click(data-toggle='modal', data-target='.ps-example-modal-lg', type='button',data-placement='left') 修改密码
+			if isCurrent
+				button.btn.btn-primary.click(data-toggle='modal', data-target='.bs-example-modal-lg', type='button',data-placement='left') 修改个人信息
+				button.btn.btn-primary.click(data-toggle='modal', data-target='.ps-example-modal-lg', type='button',data-placement='left') 修改密码
 
 			.modal.fade.bs-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
 				.setwidth.modal-dialog.modal-lg
@@ -52,7 +55,7 @@ template(name="profile")
 							form#profiles(role='form')
 								.form-group
 									| 昵称:
-									input#nickname.form-control(type='text', value='#{nickname}', required)
+									input#nickname.form-control(type='text', value='#{User.profile.nickname}', required)
 									br
 									| 性别：
 									br
@@ -73,7 +76,7 @@ template(name="profile")
 									br
 									br
 									| 生日:
-									input#datetimepicker.form-control(type='text',value='#{birthdate}', required)
+									input#datetimepicker.form-control(type='text',value='#{User.profile.birthdate}', required)
 									br
 									| 学校:
 									select#college.form-control
