@@ -16,3 +16,5 @@ mquandalle:jade
 twbs:bootstrap
 iron:router
 stevezhu:sass
+accounts-base
+tsega:bootstrap3-datetimepicker

@@ -14,12 +14,9 @@
     - 被赞数         (totalLike[int])
     - 被采纳数       (totalBest[int])
     - 是否上传头像    (uploadHead[bool])
-    - 回答过的问题           (answers[ObjectID数组])
-    - 提出的问题            (questions[ObjectID数组])
-    - 被采纳的回答对应问题    (bests[ObjectID数组])
-    - 点赞过的回答           (likes[ObjectID数组])
+    - 回答过的问题           (answers[])
+    - 提出的问题            (questions[])
 */
-
 
 Template.register.events {
 	'submit #register-module': (e, t) !->
@@ -31,8 +28,8 @@ Template.register.events {
 
 		Accounts.create-user {email: email, password: password, 
 		profile: {nickname: nickname, gender:'male', birthdate: '2000-01-01', college: 'unknown', score: 0,
-		totalAsk: 0, totalAnswer: 0, totalLike: 0,totalBest: 0, uploadHead: false,
-		answers: [], questions: [], bests: [], likes: []}}, (err)->
+		totalAsk: 0, totalAnswer: 0, totalLike: 0, totalBest: 0, uploadHead: false,
+		answers: [], questions: []}}, (err)->
 			if err then console.log err
 			else Router.go '/profile'
 }
