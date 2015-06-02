@@ -1,57 +1,110 @@
 template(name="profile")
-	.container
-		.row
-			.col-md-8
-				h1 个人资料
-		.row
-			.col-md-8.col-md-offset-1
-				img(src="images/u66.png")
-				| 黑猫警长
-		.row
-			.col-md-8.col-md-offset-1
-				+table1
-		.row
-			.col-md-8
-				h1 我的问题
-			.col-md-8
-				+table1
+	.container.addmargintop
+		div.datas
+			.row
+				.col-md-8
+					h3 个人资料
+			.row
+				.col-md-8
+					img(src="images/u66.png")
+					| #{User.profile.nickname}
+			.row
+				.col-md-8
+					table.table
+						thead
+							tr
+								th 积分
+								th 提问数
+								th 回答数
+								th 被赞数
+								th 被采纳数
+								th 回答被采纳率
+						tbody
+							tr
+								td #{User.profile.score}
+								td 
+									a(href='#') #{User.profile.totalAsk}
+								td 
+									a(href='#') #{User.profile.totalAnswer}
+								td #{User.profile.totalLike}
+								td #{User.profile.totalBest}
+								td #{bestRate}
 
-		.row
-			.col-md-8
-				h1 我答过的
-			.col-md-8
-				+table1
-template(name="table2")
-	table.table
-		thead
-			tr
-				th 标题
-				th 类别
-				th 回答数
-				th 悬赏分
-				th 有无采纳
-				th 时间
-		tbody
-			tr
-				td 找妹子
-				td 其他
-				td 10
-				td 10
-				td 无
-				td 2015-07-19
-template(name="table1")
-	table.table
-		thead
-			tr
-				th 积分
-				th 提问数
-				th 回答数
-				th 被赞数
-				th 回答被采纳率
-		tbody
-			tr
-				td 1000
-				td 10
-				td 100
-				td 100
-				td 100%
+		div.profile
+			.personalInfo
+				h2 个人信息
+				if isMale
+					p.info 性别：男
+				else
+					p.info 性别：女
+				p 生日：#{User.profile.birthdate}
+				p 学校：#{User.profile.college}
+
+			if isCurrent
+				button.btn.btn-primary.click(data-toggle='modal', data-target='.bs-example-modal-lg', type='button',data-placement='left') 修改个人信息
+				button.btn.btn-primary.click(data-toggle='modal', data-target='.ps-example-modal-lg', type='button',data-placement='left') 修改密码
+
+			.modal.fade.bs-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+				.setwidth.modal-dialog.modal-lg
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden="true") &#215;
+							h4.modal-title 修改个人信息
+						.modal-body
+							form#profiles(role='form')
+								.form-group
+									| 昵称:
+									input#nickname.form-control(type='text', value='#{User.profile.nickname}', required)
+									br
+									| 性别：
+									br
+									if isMale
+										label.radio-inline
+											input(type='radio', value='female', name='gender')
+											| 女
+										label.radio-inline
+											input(type='radio', value='male', name='gender', checked)
+											| 男
+									else 
+										label.radio-inline
+											input(type='radio', value='female', name='gender', checked)
+											| 女
+										label.radio-inline
+											input(type='radio', value='male', name='gender')
+											| 男
+									br
+									br
+									| 生日:
+									input#datetimepicker.form-control(type='text',value='#{User.profile.birthdate}', required)
+									br
+									| 学校:
+									select#college.form-control
+										option(value='SYSU') 中山大学
+										option(value='SCUT') 华南理工大学
+										option(value='GUFS') 广东外语外贸大学
+						.modal-footer
+							button.btn.btn-default(type='button', data-dismiss='modal') 关闭
+							button#saveProfile.btn.btn-primary(type='button', data-dismiss='modal') 保存
+
+			.modal.fade.ps-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
+				.setwidth2.modal-dialog.modal-lg
+					.modal-content
+						.modal-header
+							button.close(type='button', data-dismiss='modal')
+								span(aria-hidden="true") &#215;
+							h4.modal-title 修改密码
+						.modal-body
+							form#password(role='form')
+								| 原密码
+								input#oldPassword.form-control(type='password', placeholder='原密码')
+								br
+								| 新密码
+								input#newPassword.form-control(type='password', placeholder='新密码')
+								br
+								| 确认新密码
+								input#newAgain.form-control(type='password', placeholder='确认新密码')
+						.modal-footer
+							button.btn.btn-default(type='button', data-dismiss='modal') 取消
+							button#changePassword.btn.btn-primary(type='button', data-dismiss='modal', disabled='disabled') 确认
+		
