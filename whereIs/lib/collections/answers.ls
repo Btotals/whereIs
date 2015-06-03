@@ -5,7 +5,6 @@
 热度 (heat[int]，被赞+1，被踩-1)
 回答者 (answererID[ObjectID]，回答者的ID)
 对应问题 (questionID[ObjectID]，对应问题的ID)
-赞了这条回答的人ID (likers[ObjectID数组])
 是否被采纳 (isBest[bool])
 */
 
