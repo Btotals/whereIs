@@ -1,11 +1,21 @@
+.agree {
+	float: right;
+	margin-top:-25px;
+}
+
+.position-helper {
+	width: 80%;
+	margin: 0 auto;
+}
+
 .content {
-    margin-left: 8%;
+    margin: 8%;
     margin-top:4%;
     color: black;
 }
 .question {
     color: black;
-    width: 830px;
+    width: 100%;
 }
 
 .
@@ -23,16 +33,17 @@ h1 {
 .reward, .time {
 	font-size: 1.4rem;
 	color:grey;
+	margin-right: 20px;
 }
 
 .answer_content {
 	font-size: 1.6rem;
 }
 .answer {
-	margin-top:2%;
+	margin-top: 43px;
 	padding-bottom: 5px;
-	width: 830px;
-	background-color: rgba(166, 166, 166, 0.1);
+	width: 100%;
+
 }
 .answer_child {
             margin-left:3%;
@@ -65,7 +76,7 @@ h1 {
 .my textarea {
 	margin-top: 15px;
 	height: 94px;
-	width: 830px;
+	width: 100%;
 }
 .my button {
 	height: 30px;

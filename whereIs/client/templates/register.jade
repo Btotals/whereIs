@@ -1,20 +1,34 @@
 template(name="register")
-	.container
+	.row#first.myclass
+		.col-md-4.col-md-offset-2
+			img(src="images/logo.png")
+		.col-md-4.col-md-offset-1
+			form.form-signin#register-module.hehe(action='/signup', method='POST')
+				.row
+					.row.col-md-5
+						span.h3 注册帐号
+					.row.col-md-6
+						a(href="/login")
+							button(class='btn btn-lg btn-warning btn-block SignIn' id='back_to_signin') Return to Sign in
+				<br>
+				.row
+					input(type='text', name='email', id = 'res_email', class='form-control', placeholder='Email',required, autofocus)
+					<br>
+					input(type='password', name='password', id = 'res_password', class='form-control', placeholder='Password', required)
+					<br>
+					input(type='text', name='nickname', id = 'nickname', class='form-control', placeholder='Nickname', required)
+					<br>
+				.row
+					button(class='btn btn-lg btn-primary btn-block Register' id='regist2') Register
+			span.clearfix
+	.row#second
 		.row
-			.col-md-4.col-md-offset-2
-				img(src="images/logo.png")
-			.col-md-4
-				h1.text-center.login-title 注册
-				.signup-wall
-					form.form-signin#register-module(action='/signup', method='POST')
-						input(type='text', name='email', id = 'email', class='form-control', placeholder='Email',required, autofocus)
-						input(type='password', name='password', id = 'password', class='form-control', placeholder='Password', required)
-						input(type='text', name='nickname', id = 'nickname', class='form-control', placeholder='Nickname', required)
-						.row
-							.col-md-6
-								button(class='btn btn-lg btn-primary btn-block Register') Register
-							.col-md-6
-								a(href="/login")
-									button(class='btn btn-lg btn-warning btn-block SignIn') Return to Sign in
-						span.clearfix
+			h1 <br>
+			h3.text-center 想要的商品和服务总是找不到？哪有我想要的？
+		.row
+			.imagepositioner
+				img(src='/images/small.png', id='second_image')
+		.row
+			h3.text-center 你的生活小帮手
+		h1 <br>		
 

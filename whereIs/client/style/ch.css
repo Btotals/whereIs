@@ -1,0 +1,68 @@
+.resetwidth {
+	width:60px!important;
+}
+
+.resetwidth2 {
+	width:85%!important;
+}
+
+.resetwidth3 {
+	width:95%!important;
+	margin:0 auto!important;
+}
+
+.resetwidth4 {
+	width: 100% !important;
+}
+
+.resetwidth5 {
+	width:275px;
+}
+
+.resetwidth6 {
+	width: 60% !important;
+}
+
+.addmarginleft {
+	margin-left: 60px;
+}
+
+.addmargintop {
+	margin-top: 50px!important;
+}
+
+.addmargintop2 {
+	margin-top: 43px!important;
+}
+
+.addmargintop3 {
+	margin-top: 15px!important;
+}
+
+.nav-container {
+	width: 1000px;
+	margin:0 auto;
+}
+
+.resetsize {
+	width: 4rem!important;
+	height: 4rem!important;
+}
+
+.statistic {
+	margin-left: 2.15rem!important; 
+}
+
+.resetfontsize {
+	text-indent: 2rem;
+	font-size: 2rem!important;
+}
+
+.resetfontsize2 {
+	text-indent: 2rem;
+	font-size: 1.7rem!important;
+}
+
+.addmarginbotton {
+	margin-bottom: 30px;
+}

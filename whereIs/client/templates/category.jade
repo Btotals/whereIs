@@ -2,14 +2,13 @@ template(name="solvedBrowse")
 	.container
 		.row
 			.col-md-10
-				ul#myTab.nav.nav-tabs
+				ul#myTab.nav.nav-tabs.addmarginbotton.addmargintop2
 					li.active
 						a(href='/browse/#{nowCategory}/solved/1') 已解决
 					li
 						a(href='/browse/#{nowCategory}/unsolved/1') 待解决
 				#myTabContent.tab-content
 					#solved.tab-pane.fade.in.active
-						+title
 						each solvedQuestions
 							{{> questionItem}}
 					#unsolved.tab-pane.fade
@@ -26,7 +25,7 @@ template(name="unsolvedBrowse")
 	.container
 		.row
 			.col-md-10
-				ul#myTab.nav.nav-tabs
+				ul#myTab.nav.nav-tabs.addmarginbotton.addmargintop2
 					li
 						a(href='/browse/#{nowCategory}/solved/1') 已解决
 					li.active
@@ -34,7 +33,6 @@ template(name="unsolvedBrowse")
 				#myTabContent.tab-content
 					#solved.tab-pane.fade
 					#unsolved.tab-pane.fade.in.active
-						+title
 						each unsolvedQuestions
 							{{> questionItem}}
 
@@ -46,24 +44,18 @@ template(name="unsolvedBrowse")
 					li
 						a(href='#{nextPage}') 下一页
 
-template(name="title")
-	.row.shift-down-1vh
-		.col-md-7
-			h5.text-left 标题
-		.col-md-3
-			h5.text-center 回答数
-		.col-md-2
-			h5.text-center 发布时间
 
 template(name="questionItem")
-	.row.shift-down-1vh
-		.col-md-7
-			a(href="/questiondetail/#{_id}") #{title}
-		.col-md-3
-			h5.text-center #{totalAnswer}
-		.col-md-2
-			h5.text-center #{addTime}
-
-
-
-
+	.ui.divided.items
+		.link.item
+			.ui.tiny.image.resetwidth
+				img(src="/images/u10.png")
+			.content
+				a(href='/questiondetail/#{_id}').header #{title}
+				.description
+					span.h6 
+						a(href='/profile/#{askerID}') #{askerNickname}
+						|发布于 #{addTime}, 悬赏分数: #{reward}
+				span.pull-right #{totalAnswer}人回答
+	.ui.divider
+	

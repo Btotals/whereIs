@@ -1,0 +1,29 @@
+#first{
+	background-color:rgb(0, 120, 209);
+	height:400px;
+}
+
+#res_email, #res_password, #nickname, #regist2{
+	width:306px;
+}
+
+#regist2, #back_to_signin{
+	height:40px;
+	padding:5px;
+}
+
+#email, #password{
+	height:40px;
+}
+
+#second_image{
+	
+	width:250px;
+	height:130px;
+}
+
+.imagepositioner {
+	width: 250px;
+	margin:0 auto;
+}
+
