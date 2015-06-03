@@ -6,7 +6,7 @@ Router.configure {
 
 Router.route '/',  (eee) !->
 	top5Users = Meteor.users.find {}, {sort: {'profile.score': -1}, limit: 5}
-	top5Questions = Questions.find {}, {sort: {'totalAsk': -1}, limit: 5}
+	top5Questions = Questions.find {}, {sort: {'totalAnswer': -1}, limit: 5}
 	new5Questions = Questions.find {}, {sort: {'addTime': -1}, limit: 5}
 	this.render 'home', {
 		data: -> {
@@ -37,23 +37,39 @@ Router.route '/addquestion', {name: 'addQuestion'}
 Router.route '/questiondetail/:_id', (eee) !->
 	this.render 'questionDetail', {
 		data: -> {
-			Questions: Quesitions.findOne this.params._id
+			Question: Questions.findOne this.params._id
 		}
 	}
 
-Router.route '/222', {name: 'questionDetail'}
-
-Router.route '/browse/:_category/:_page', (eee) !->
+Router.route '/browse/:_category/solved/:_page', (eee) !->
 	itemPerPage = 1
 	itemMin = itemPerPage*((parseInt this.params._page)-1)
 	itemMax = itemPerPage*(parseInt this.params._page)-1
-	ques = Questions.find {category: this.params._category}, {skip: itemMin, limit: itemPerPage}
-	console.log ques
-	if ques.count! is 0
-		ques = 0
-	this.render 'browse', {
+
+	solvedQues = Questions.find {category: this.params._category, isHandled: true}, {skip: itemMin, limit: itemPerPage}
+
+	if solvedQues.count! is 0
+		solvedQues = 0
+
+	this.render 'solvedBrowse', {
 		data: -> {
-			Questions: ques
+			solvedQuestions: solvedQues
+		}
+	}
+
+Router.route '/browse/:_category/unsolved/:_page', (eee) !->
+	itemPerPage = 1
+	itemMin = itemPerPage*((parseInt this.params._page)-1)
+	itemMax = itemPerPage*(parseInt this.params._page)-1
+
+	unsolvedQues = Questions.find {category: this.params._category, isHandled: false}, {skip: itemMin, limit: itemPerPage}
+
+	if unsolvedQues.count! is 0
+		unsolvedQues = 0
+
+	this.render 'unsolvedBrowse', {
+		data: -> {
+			unsolvedQuestions: unsolvedQues
 		}
 	}
 
@@ -81,7 +97,6 @@ logged = (e)!->
 	else
 		this.next!
 
-#Router.onBeforeAction requireLogin, {only: 'profile'}
 Router.onBeforeAction requireLogin, {only: 'addQuestion'}
 
 Router.onBeforeAction logged, {only: 'login'}

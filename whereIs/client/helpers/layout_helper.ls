@@ -3,39 +3,39 @@ Template.layout.helpers {
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
 
-		items = items.slice -3
+		items = items.slice -4
 		items.splice 0, 0, ''
 
 		items.pop!
-		return (items.join '/') is '/browse/eatCloth'
+		return ((items.join '/') is '/browse/eatCloth/unsolved') or ((items.join '/') is '/browse/eatCloth/solved')
 
 	isLiveWalk: ->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
 
-		items = items.slice -3
+		items = items.slice -4
 		items.splice 0, 0, ''
 
 		items.pop!
-		return (items.join '/') is '/browse/liveWalk'
+		return (items.join '/') is '/browse/liveWalk/unsolved' or (items.join '/') is '/browse/liveWalk/solved'
 
 	isStudy: ->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
 
-		items = items.slice -3
+		items = items.slice -4
 		items.splice 0, 0, ''
 
 		items.pop!
-		return (items.join '/') is '/browse/study'
+		return (items.join '/') is '/browse/study/unsolved' or (items.join '/') is '/browse/study/solved'
 
 	isOther: ->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
 
-		items = items.slice -3
+		items = items.slice -4
 		items.splice 0, 0, ''
 		
 		items.pop!
-		return (items.join '/') is '/browse/other's
+		return (items.join '/') is '/browse/other/unsolved' or (items.join '/') is '/browse/other/solved'
 }
