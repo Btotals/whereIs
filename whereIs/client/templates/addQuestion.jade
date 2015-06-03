@@ -1,17 +1,17 @@
 template(name="addQuestion")
 	.container
 		.row-md-3
-			h1 添加你想问的问题
+			h1.pHead 添加你想问的问题
 		.row-md-9
 			form(role="form", action="/addquestion", method="post")
 				div.form-group.col-md-8
 					label Title
-					input.form-control(name="questionTitle" placeholder="大学城哪有...",required)
+					input.block.form-control(name="questionTitle" placeholder="大学城哪有...",required)
 				div.form-group.col-md-8
 					label Question
-					textarea.form-control(rows="3" name="questionContent" placeholder="大学城哪有...",required)
+					textarea.block.form-control(rows="3" name="questionContent" placeholder="大学城哪有...",required)
 				div.form-group.col-md-12
-					label.col-md-12 问题分类
+					label.sTitle.col-md-12 问题分类
 					label.radio-inline
 						input(type="radio" name="questionCategory" value="eatCloth")
 						| 衣食
@@ -24,13 +24,13 @@ template(name="addQuestion")
 					label.radio-inline
 						input(type="radio" name="questionCategory" value="other", checked)
 						| 其他
-				div.form-group.col-md-2.col-md-offset-7
-					label score
+				div.score.form-group.col-md-2.col-md-offset-7
+					label 悬赏分
 						select.form-control(name="questionReward",required)
 							option 0
 							option 10
 							option 20
 							option 50
 							option 100
-				div.form-group.col-md-12.col-md-offset-7
-					input.btn.btn-warning(type="submit", value="Submit")
+				div.form-group.col-md-2.col-md-offset-7
+					input.bt.btn.btn-default(type="submit", value="Submit")
