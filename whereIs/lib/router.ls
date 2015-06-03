@@ -42,7 +42,7 @@ Router.route '/questiondetail/:_id', (eee) !->
 	}
 
 Router.route '/browse/:_category/solved/:_page', (eee) !->
-	itemPerPage = 1
+	itemPerPage = 2
 	itemMin = itemPerPage*((parseInt this.params._page)-1)
 	itemMax = itemPerPage*(parseInt this.params._page)-1
 
@@ -58,7 +58,7 @@ Router.route '/browse/:_category/solved/:_page', (eee) !->
 	}
 
 Router.route '/browse/:_category/unsolved/:_page', (eee) !->
-	itemPerPage = 1
+	itemPerPage = 2
 	itemMin = itemPerPage*((parseInt this.params._page)-1)
 	itemMax = itemPerPage*(parseInt this.params._page)-1
 

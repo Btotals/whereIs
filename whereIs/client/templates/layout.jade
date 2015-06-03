@@ -1,4 +1,54 @@
 template(name="layout")
+	//- .ui.pointing.menu(style="display: block;")
+	//- 	.nav-container.pointing
+	//- 		a(href="/browse/eatCloth/solved/1").item
+	//- 				i.home.icon
+	//- 				| 哪有
+	//- 		if isEatCloth
+	//- 			a(href="/browse/eatCloth/solved/1").item.active
+	//- 				| 衣食
+	//- 		else
+	//- 			a(href="/browse/eatCloth/solved/1").item
+	//- 				| 衣食
+
+	//- 		if isLiveWalk
+	//- 			a(href="/browse/liveWalk/solved/1").item.active
+	//- 				| 住行
+	//- 		else
+	//- 			a(href="/browse/liveWalk/solved/1").item
+	//- 				| 住行
+
+	//- 		if isStudy
+	//- 			a(href="/browse/study/solved/1").item.active
+	//- 				| 学习
+	//- 		else
+	//- 			a(href="/browse/study/solved/1").item
+	//- 				| 学习
+
+	//- 		if isOther
+	//- 			a(href="/browse/other/solved/1").item.active
+	//- 				| 其他
+	//- 		else
+	//- 			a(href="/browse/other/solved/1").item
+	//- 				| 其他
+	//- 		.right.menu
+	//- 			.item
+	//- 					.ui.icon.input
+	//- 							input(type="text", placeholder="哪有...")
+	//- 							i.search.link.icon
+	//- 			if currentUser
+	//- 				.ui.dropdown.item
+	//- 					| #{currentUser.profile.nickname}
+	//- 					i.dropdown.icon
+	//- 					.menu.ui.transition.hidden
+	//- 							a(href="/profile/#{currentUser._id}").item 我的主页
+	//- 							.ui.divider
+	//- 							a(href="/logout").item 退出登录
+	//- 			else
+	//- 				a.item
+	//- 					i.user.icon
+	//- 					| 请登录
+
 	nav.navbar.navbar-default
 		.container-fluid
 			.navbar-header
@@ -16,12 +66,10 @@ template(name="layout")
 
 			.collapse.navbar-collapse#bs-example-navbar-collapse-1
 				form.navbar-form.navbar-left(role="search")
-					.form-group
-						input.form-control#search-input(
-							type="text"
-							placeholder="Where is..."
-						)
-					button.btn.btn-default(type="submit") Search
+					.ui.icon.input
+						input.prompt(type="text", placeholder="哪有...", autocomplete="off")
+						i.search.icon
+					a.btn.btn-default(href="/addquestion", role="button") 我要提问
 				ul.nav.navbar-nav.navbar-left
 					if isEatCloth
 						li.active
@@ -49,7 +97,7 @@ template(name="layout")
 							a(href="/browse/other/solved/1") 其他
 					
 					if currentUser
-						li.dropdown
+						li.dropdown.addmarginleft
 							a.dropdown-toggle(
 								data-toggle="dropdown"
 								role="button"
@@ -57,11 +105,13 @@ template(name="layout")
 								href="#"
 							) #{currentUser.profile.nickname}
 								span.caret
+
 							ul.dropdown-menu.dropdown-menu-right(role="menu")
 								li
 									a(href="/profile/#{currentUser._id}") 
 										span(aria-hidden="true").glyphicon.glyphicon-home
 										span 我的主页
+<<<<<<< HEAD
 								li
 									a(href="#")
 										span(aria-hidden="true").glyphicon.glyphicon-cog
@@ -70,12 +120,21 @@ template(name="layout")
 									a(href="/addquestion") 
 										span(aria-hidden="true").glyphicon.glyphicon-question-sign
 										span 提问
+=======
+>>>>>>> CuiH-master
 								li.divider
 								li
 									a(href="/logout")
 										span(aria-hidden="true").glyphicon.glyphicon-log-out
 										span 注销
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> CuiH-master
 					else
-						li
+						li.addmarginleft
 							a(href="/login") 请登录
 	{{> yield}}
+	//- .ui.divider.addmargintop
+	//- |group 7

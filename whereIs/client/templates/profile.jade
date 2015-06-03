@@ -1,7 +1,8 @@
 template(name="profile")
-	.container.addmargintop
-		div.datas
+	.container
+		div.datas.col-md-9
 			.row
+<<<<<<< HEAD
 				.col-md-8
 					h3 个人资料
 			.row
@@ -28,20 +29,96 @@ template(name="profile")
 								td #{User.profile.totalLike}
 								td #{User.profile.totalBest}
 								td #{bestRate}
+=======
+				.ui.card.resetwidth3.addmargintop
+					.content
+						.header
+							|TA在哪有
+						.description
+							.ui.statistics
+								.statistic
+									.value
+										| #{User.profile.score}
+									.label
+										| 积分
+								.statistic
+									.value
+										| #{User.profile.totalAsk}
+									.label
+										| 提问数
+								.statistic
+									.value
+										| #{User.profile.totalAnswer}
+									.label
+										| 回答数
+								.statistic
+									.value
+										| #{User.profile.totalLike}
+									.label
+										| 被赞数
+								.statistic
+									.value
+										| #{User.profile.totalBest}
+									.label
+										| 被采纳数
+								.statistic
+									.value
+										| #{bestRate}
+									.label
+										| 回答被采纳率
 
-		div.profile
-			.personalInfo
-				h2 个人信息
-				if isMale
-					p.info 性别：男
-				else
-					p.info 性别：女
-				p 生日：#{User.profile.birthdate}
-				p 学校：#{User.profile.college}
+					.ui.two.bottom.attached.buttons
+						.ui.button.resetwidth4
+						
+>>>>>>> CuiH-master
 
-			if isCurrent
-				button.btn.btn-primary.click(data-toggle='modal', data-target='.bs-example-modal-lg', type='button',data-placement='left') 修改个人信息
-				button.btn.btn-primary.click(data-toggle='modal', data-target='.ps-example-modal-lg', type='button',data-placement='left') 修改密码
+			.ui.divider.addmargintop
+			.ui.segment(style="min-height: 8rem;")
+				.ui.blue.ribbon.label TA的问题
+				table.table
+					thead
+						tr
+							th 标题
+							th 悬赏分
+							th 是否解决
+							th 时间
+					tbody
+						each User.profile.questions
+							{{> myQuestions}}
+			.ui.divider
+
+			.ui.segment(style="min-height: 8rem;")
+				.ui.blue.ribbon.label TA的回答
+				table.table
+					thead
+						tr
+							th 标题
+							th 悬赏分
+							th 是否被采纳
+							th 时间
+					tbody
+						each User.profile.answers
+							{{> myAnswers}}
+
+		.ui.cards.resetwidth5.addmargintop2
+			.card
+				.image
+					img(src="/images/u66.png")
+				.content
+					.header #{User.profile.nickname}
+					.meta
+						a.group 
+							if isMale
+								|男
+							else
+								|女
+					.description
+						p 来自: #{User.profile.college}
+						p 生日: #{User.profile.birthdate}
+				if isCurrent
+					.extra.content
+						button.btn.btn-primary.click(data-toggle='modal', data-target='.bs-example-modal-lg', type='button',data-placement='left') 修改个人信息
+						button.right.floated.created.btn.btn-primary.click(data-toggle='modal', data-target='.ps-example-modal-lg', type='button',data-placement='left') 修改密码
 
 			.modal.fade.bs-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myLargeModalLabel', aria-hidden='true')
 				.setwidth.modal-dialog.modal-lg
@@ -106,4 +183,26 @@ template(name="profile")
 						.modal-footer
 							button.btn.btn-default(type='button', data-dismiss='modal') 取消
 							button#changePassword.btn.btn-primary(type='button', data-dismiss='modal', disabled='disabled') 确认
-		
+
+template(name="myQuestions")
+	tr
+		th(scope="row")
+			a(href='/questiondetail/#{questionId}') #{title}
+		td #{reward}
+		if isHandled
+			td 是
+		else
+			td 否
+		td #{addTime}
+
+template(name="myAnswers")
+	tr
+		th(scope="row")
+			a(href='/questiondetail/#{questionId}') #{title}
+		td #{reward}
+		if isBest
+			td 是
+		else
+			td 否
+		td #{addTime}
+	

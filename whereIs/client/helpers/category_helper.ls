@@ -8,8 +8,8 @@ Template.solvedBrowse.helpers {
 
 		category = items[2]
 		size = Questions.find {category: category, isHandled: true} .count!
-		itemPerPage = 1
-		maxPage = (size+itemPerPage-1)/itemPerPage
+		itemPerPage = 2
+		maxPage = parseInt((size+itemPerPage-1)/itemPerPage)
 		return maxPage
 
 	nextPage: !->
@@ -21,8 +21,8 @@ Template.solvedBrowse.helpers {
 
 		category = items[2]
 		size = Questions.find {category: category, isHandled: true} .count!
-		itemPerPage = 1
-		maxPage = (size+itemPerPage-1)/itemPerPage
+		itemPerPage = 2
+		maxPage = parseInt((size+itemPerPage-1)/itemPerPage)
 
 		nowPage = items[4]
 		if +nowPage >= maxPage
@@ -65,8 +65,8 @@ Template.unsolvedBrowse.helpers {
 
 		category = items[2]
 		size = Questions.find {category: category, isHandled: false} .count!
-		itemPerPage = 1
-		maxPage = (size+itemPerPage-1)/itemPerPage
+		itemPerPage = 2
+		maxPage = parseInt((size+itemPerPage-1)/itemPerPage)
 		return maxPage
 
 	nextPage: !->
@@ -78,8 +78,8 @@ Template.unsolvedBrowse.helpers {
 
 		category = items[2]
 		size = Questions.find {category: category, isHandled: false} .count!
-		itemPerPage = 1
-		maxPage = (size+itemPerPage-1)/itemPerPage
+		itemPerPage = 2
+		maxPage = parseInt((size+itemPerPage-1)/itemPerPage)
 
 		nowPage = items[4]
 		if +nowPage >= maxPage

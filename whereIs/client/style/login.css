@@ -1,0 +1,42 @@
+#first{
+	background-color:rgb(0, 120, 209);
+	height:400px;
+}
+
+#email, #password, #signin{
+	width:255px;
+}
+
+#signin, #regist{
+	height:40px;
+	padding:5px;
+}
+
+#email, #password{
+	height:40px;
+}
+
+#second_image{
+	margin:0 auto;
+	width:250px;
+	height:130px;
+}
+
+.myclass:before {
+	height: 100%;
+	content: " ";
+	display: inline-block;
+	vertical-align: middle;
+	width: 1px;
+}
+
+#first .col-md-4 {
+	display: inline-block;
+	vertical-align: middle;
+	float: none!important;
+}
+
+.hehe {
+	margin-top:0!important; 
+}
+

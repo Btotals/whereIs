@@ -1,5 +1,6 @@
 template(name="addQuestion")
 	.container
+<<<<<<< HEAD
 		.row-md-3
 			h1.pHead 添加你想问的问题
 		.row-md-9
@@ -34,3 +35,41 @@ template(name="addQuestion")
 							option 100
 				div.form-group.col-md-2.col-md-offset-7
 					input.bt.btn.btn-default(type="submit", value="Submit")
+=======
+		.ui.two.column.grid.addmargintop
+			.row
+				.column.resetwidth4
+					.ui.raised.segment
+						.ui.blue.ribbon.label 我要提问
+						form.addmargintop2(role="form", action="/addquestion", method="post")
+							div.form-group.col-md-8.resetwidth4
+								label 题目
+								input.form-control(name="questionTitle" placeholder="大学城哪有...",required)
+							div.form-group.col-md-8.resetwidth4
+								label 描述
+								textarea.form-control(rows="3" name="questionContent" placeholder="大学城哪有...",required)
+							div.form-group.col-md-12.resetwidth4
+								label.col-md-12 问题分类
+								label.radio-inline
+									input(type="radio" name="questionCategory" value="eatCloth")
+									| 衣食
+								label.radio-inline
+									input(type="radio" name="questionCategory" value="liveWalk")
+									| 住行
+								label.radio-inline
+									input(type="radio" name="questionCategory" value="study")
+									| 学习
+								label.radio-inline
+									input(type="radio" name="questionCategory" value="other", checked)
+									| 其他
+							div.form-group.col-md-2.resetwidth4
+								label.pull-right score
+									select.form-control(name="questionReward",required)
+										option 0
+										option 10
+										option 20
+										option 50
+										option 100
+							div.form-group.col-md-12
+								input.pull-right.btn.btn-warning(type="submit", value="Submit")
+>>>>>>> CuiH-master

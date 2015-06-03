@@ -13,8 +13,11 @@ mrt:moment
 insecure
 vasaka:livescript-compiler
 mquandalle:jade
-twbs:bootstrap
 iron:router
 stevezhu:sass
 accounts-base
 tsega:bootstrap3-datetimepicker
+twbs:bootstrap
+semantic:ui-button
+semantic:ui-css
+semantic:ui-dropdown

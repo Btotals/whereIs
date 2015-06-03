@@ -19,10 +19,10 @@ Template['profile'].helpers {
 
 	bestRate: !->
 		totalBest = +(this.User.profile['totalBest'])
-		totalAsk = +(this.User.profile['totalAsk'])
-		if totalAsk is 0
+		totalAnswer = +(this.User.profile['totalAnswer'])
+		if totalAnswer is 0
 			return '0%'
-		return (totalBest/totalAsk).toFixed(1)*100 + '%'
+		return (totalBest/totalAnswer).toFixed(2)*100 + '%'
 
 }
 

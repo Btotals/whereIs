@@ -49,10 +49,10 @@ Template['questionDetail'].events({
 		var answererBest = answerer.profile.totalBest;
 		var answererAnswers = answerer.profile.answers;
 
-
 		for (i = 0; i < answererAnswers.length; i++) {
 			if (answererAnswers[i].questionId == questionId) {
 				answererAnswers[i].isBest = true;
+				break;
 			}
 		}
 		
@@ -63,6 +63,28 @@ Template['questionDetail'].events({
 				console.log("处理回答者失败");
 			} else {
 				console.log("处理回答者成功");
+			}
+		});
+
+
+		// 提问者当前问题isHandled
+		var asker = Meteor.users.findOne(question.askerID);
+		var askerQuestions = asker.profile.questions;
+
+		for (i = 0; i < askerQuestions.length; i++) {
+			if (askerQuestions[i].questionId == questionId) {
+				askerQuestions[i].isHandled = true;
+				break;
+			}
+		}
+
+		Meteor.users.update(question.askerID, {
+			$set: {'profile.questions': askerQuestions}
+		}, function(error) {
+			if (error) {
+				console.log("处理提问者失败");
+			} else {
+				console.log("处理提问者成功");
 			}
 		});
 	},
@@ -149,7 +171,6 @@ Template['questionDetail'].events({
 			addTime: this.Question.addTime,
 			category: this.Question.category,
 			reward: this.Question.reward,
-			totalAnswer: 0,
 			isBest: false              // whether this user's answer is selected to be the best one
 		}
 		myAnswers.push(targetQuestion);

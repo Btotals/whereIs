@@ -39,3 +39,6 @@ Template.layout.helpers {
 		items.pop!
 		return (items.join '/') is '/browse/other/unsolved' or (items.join '/') is '/browse/other/solved'
 }
+
+# Template.layout.onRendered !->
+# 	$ '.ui.dropdown' .dropdown!
