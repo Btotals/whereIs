@@ -4,17 +4,7 @@ Router.configure {
 	layoutTemplate: 'layout'
 }
 
-Router.route '/',  (eee) !->
-	top5Users = Meteor.users.find {}, {sort: {'profile.score': -1}, limit: 5}
-	top5Questions = Questions.find {}, {sort: {'totalAsk': -1}, limit: 5}
-	new5Questions = Questions.find {}, {sort: {'addTime': -1}, limit: 5}
-	this.render 'home', {
-		data: -> {
-			Users: top5Users,
-			tQuestions: top5Questions,
-			nQuestions: new5Questions
-		}
-	}
+Router.route '/', {name: 'home'}
 
 Router.route '/register', {name: 'register'}
 
@@ -23,14 +13,9 @@ Router.route '/login', {name: 'login'}
 Router.route '/logout', !->
 	Meteor.logout (err)->
 		if err then alert 'fail!'
-		Router.go '/login'
+		else Router.go '/'
 
-Router.route '/profile/:_id', (eee) !->
-	this.render 'profile', {
-		data: -> {
-			User: Meteor.users.findOne this.params._id
-		}
-	}
+Router.route '/profile', {name: 'profile'}
 
 Router.route '/addquestion', {name: 'addQuestion'}
 
@@ -40,8 +25,6 @@ Router.route '/questiondetail/:_id', (eee) !->
 			Questions: Quesitions.findOne this.params._id
 		}
 	}
-
-Router.route '/222', {name: 'questionDetail'}
 
 Router.route '/browse/:_category/:_page', (eee) !->
 	itemPerPage = 1
@@ -75,14 +58,5 @@ requireLogin = (e)!->
 	else
 		this.next!
 
-logged = (e)!->
-	if Meteor.user!
-		Router.go '/'
-	else
-		this.next!
-
-#Router.onBeforeAction requireLogin, {only: 'profile'}
+Router.onBeforeAction requireLogin, {only: 'profile'}
 Router.onBeforeAction requireLogin, {only: 'addQuestion'}
-
-Router.onBeforeAction logged, {only: 'login'}
-Router.onBeforeAction logged, {only: 'register'}

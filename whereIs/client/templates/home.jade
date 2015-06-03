@@ -9,35 +9,30 @@ template(name="home")
 
 template(name="newQuestions")
 	h1.text-left 最新问题
-	each nQuestions
-		{{> newItem}}
+	+question
+	+question
+	+question
+	+question
+	+question
 
 template(name="hotQuestions")
 	h1.text-left 最热问题
-	each tQuestions
-		{{> hotItem}}
+	+question
+	+question
+	+question
+	+question
+	+question
 
-template(name="newItem")
+template(name="question")
 	.row.shift-down-1vh
 		.col-md-2
 			img(src="images/u10.png")
-		.col-md-5
-			span.h5 #{title}<br>
-			span.h6 发布于：#{addTime}
-			span.h6.shift-left-1vw 悬赏分数：#{reward}
-		.col-md-4.col-md-offset-2.removemarginleft
-			span #{totalAsk}人参与了回答
-
-template(name="hotItem")
-	.row.shift-down-1vh
-		.col-md-2
-			img(src="images/u10.png")
-		.col-md-5
-			span.h5 #{title}<br>
-			span.h6 发布于：#{addTime}
-			span.h6.shift-left-1vw 悬赏分数：#{reward}
-		.col-md-4.col-md-offset-2.removemarginleft
-			span #{totalAsk}人参与了回答
+		.col-md-4
+			span.h5 大学城哪里可以吃到山西小米<br>
+			span.h6 发布于：2015.5.22 
+			span.h6.shift-left-1vw 悬赏分数：0
+		.col-md-4.col-md-offset-2
+			span 4人参与了回答
 
 template(name="ranklist")
 	.row
@@ -46,17 +41,18 @@ template(name="ranklist")
 		.col-md-6.h4.text-center
 			span.label.label-default 月百事通
 	.row
-		each Users
-			{{> userItem}}
+		+ranker
+		+ranker
+		+ranker
+		+ranker
+		+ranker
 
-template(name="userItem")
+template(name="ranker")
 	.shift-down-1vh
 		.row
-			.col-md-4.h2.text-center ·
+			.col-md-4.h2.text-center 1
 			.col-md-4
 				img(src="images/u66.png")
 			.col-md-4
-				span.h5 
-					a(href='/profile/#{_id}') #{profile.nickname}
-				br
-				span.h6 积分: #{profile.score}
+				span.h5 黑猫警长<br>
+				span.h6 积分：1000
