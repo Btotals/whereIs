@@ -1,41 +1,21 @@
-template(name="solvedBrowse")
+template(name="browse")
 	.container
 		.row
 			.col-md-10
 				ul#myTab.nav.nav-tabs
 					li.active
-						a(href='/browse/#{nowCategory}/solved/1') 已解决
+						a(href='#solve', data-toggle='tab')
+							| 已解决
 					li
-						a(href='/browse/#{nowCategory}/unsolved/1') 待解决
+						a(href='#answer', data-toggle='tab') 待解决
 				#myTabContent.tab-content
 					#solved.tab-pane.fade.in.active
 						+title
-						each solvedQuestions
+						each Questions
 							{{> questionItem}}
 					#unsolved.tab-pane.fade
-
-			.col-md-3.col-md-offset-4
-				ul.pagination.center
-					li
-						a(href='#{prevPage}') 上一页
-					
-					li
-						a(href='#{nextPage}') 下一页
-
-template(name="unsolvedBrowse")
-	.container
-		.row
-			.col-md-10
-				ul#myTab.nav.nav-tabs
-					li
-						a(href='/browse/#{nowCategory}/solved/1') 已解决
-					li.active
-						a(href='/browse/#{nowCategory}/unsolved/1') 待解决
-				#myTabContent.tab-content
-					#solved.tab-pane.fade
-					#unsolved.tab-pane.fade.in.active
 						+title
-						each unsolvedQuestions
+						each Questions
 							{{> questionItem}}
 
 			.col-md-3.col-md-offset-4
@@ -58,12 +38,8 @@ template(name="title")
 template(name="questionItem")
 	.row.shift-down-1vh
 		.col-md-7
-			a(href="/questiondetail/#{_id}") #{title}
+			a(href="/") #{title}
 		.col-md-3
-			h5.text-center #{totalAnswer}
+			h5.text-center #{totalAsk}
 		.col-md-2
 			h5.text-center #{addTime}
-
-
-
-

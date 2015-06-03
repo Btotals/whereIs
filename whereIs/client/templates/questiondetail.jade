@@ -1,50 +1,44 @@
 template(name="questionDetail")
-	.content
-		.question
-			h1 #{Question.title}
-			.describe
-				p #{Question.content}
-			.reward
-				p 悬赏分：#{Question.reward}
-			.time
-				p 发布时间：#{Question.addTime}
-			.time
-				p author：#{Question.askerNickname}
-		.answer
-			.answer_best
-				.best
-					span 采纳
-				if bestAnswer
-					.answer_child
-						.answer_content
-							p #{bestAnswer.content}
-						.answer_author
-							span 回答者：
-								a(href='/profile/#{bestAnswer.answererId}') #{bestAnswer.answererNickname}
-						.answer_hot_level
-							span 热度：#{bestAnswer.heat}
-				
-			.ansert_other
-				.other
-					span 其他
-				each otherAnswers
-					{{> answerItem}}
-		.my
-			span 我来回答
-			form(role="form", method="post")
-				.add
-					textarea(name='answerContent',required)
-				.sub
-					input.btn.btn-warning(type="submit", value="Submit")
-
-template(name="answerItem")
-	.answer_child
-		.answer_content
-			p #{content}
-			if isAuthorAndHasNoBest
-				button#selectBest(answerer='#{answererId}').btn.btn-default 采纳
-		.answer_author
-			span 回答者：
-				a(href='/profile/#{answererId}') #{answererNickname}
-		.answer_hot_level
-			span 热度：#{heat}
+    .content
+        .question
+            h1 大学城哪里有山东煎饼此处为问题?我就试试换行我就试试换行
+            .describe
+                p 如题（此处为问题描述）我就试试换行我就试试换行我就试试换行我就试试换行我就试试换行我就试试换行我就试试换行我就试试换行我就试试换行
+            .reward
+                p 悬赏分：10
+            .time
+                p 发布时间：2015-05-23
+        .answer
+            .answer_best
+                .best
+                    span 采纳
+                .answer_child
+                    .answer_content
+                        p 至二路口
+                    .answer_author
+                        span 回答者：sunny
+                    .answer_hot_level
+                        span 热度：5
+            .ansert_other
+                .other
+                    span 其他
+                .answer_child
+                    .answer_content
+                        p 南亭
+                    .answer_author
+                        span 回答者：虹猫
+                    .answer_hot_level
+                        span 热度：5
+                .answer_child
+                    .answer_content
+                        p 北亭
+                    .answer_author
+                        span 回答者：蓝猫
+                    .answer_hot_level
+                        span 热度：4
+        .my
+            span 我来回答
+            .add
+                textarea
+            .sub
+                button 提交

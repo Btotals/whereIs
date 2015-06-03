@@ -22,8 +22,10 @@ template(name="profile")
 						tbody
 							tr
 								td #{User.profile.score}
-								td #{User.profile.totalAsk}
-								td #{User.profile.totalAnswer}
+								td 
+									a(href='#') #{User.profile.totalAsk}
+								td 
+									a(href='#') #{User.profile.totalAnswer}
 								td #{User.profile.totalLike}
 								td #{User.profile.totalBest}
 								td #{bestRate}
