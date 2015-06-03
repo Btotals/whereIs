@@ -73,28 +73,28 @@ template(name="layout")
 				ul.nav.navbar-nav.navbar-left
 					if isEatCloth
 						li.active
-							a(href="/browse/eatCloth/1") 衣食
+							a(href="/browse/eatCloth/solved/1") 衣食
 					else
 						li
-							a(href="/browse/eatCloth/1") 衣食
+							a(href="/browse/eatCloth/solved/1") 衣食
 					if isLiveWalk
 						li.active
-							a(href="/browse/liveWalk/1") 住行
+							a(href="/browse/liveWalk/solved/1") 住行
 					else
 						li
-							a(href="/browse/liveWalk/1") 住行
+							a(href="/browse/liveWalk/solved/1") 住行
 					if isStudy
 						li.active
-							a(href="/browse/study/1") 学习
+							a(href="/browse/study/solved/1") 学习
 					else
 						li
-							a(href="/browse/study/1") 学习
+							a(href="/browse/study/solved/1") 学习
 					if isOther
 						li.active
-							a(href="/browse/other/1") 其他
+							a(href="/browse/other/solved/1") 其他
 					else
 						li
-							a(href="/browse/other/1") 其他
+							a(href="/browse/other/solved/1") 其他
 					
 					if currentUser
 						li.dropdown.addmarginleft
@@ -108,34 +108,16 @@ template(name="layout")
 
 							ul.dropdown-menu.dropdown-menu-right(role="menu")
 								li
-<<<<<<< HEAD
 									a(href="/profile/#{currentUser._id}") 
 										span(aria-hidden="true").glyphicon.glyphicon-home
 										span 我的主页
-<<<<<<< HEAD
-=======
-									a(href="/profile") 我的主页
->>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd
-								li
-									a(href="#")
-										span(aria-hidden="true").glyphicon.glyphicon-cog
-										span 个人设置
-								li
-									a(href="/addquestion") 
-										span(aria-hidden="true").glyphicon.glyphicon-question-sign
-										span 提问
-=======
->>>>>>> CuiH-master
 								li.divider
 								li
 									a(href="/logout")
 										span(aria-hidden="true").glyphicon.glyphicon-log-out
 										span 注销
-<<<<<<< HEAD
-=======
 
 
->>>>>>> CuiH-master
 					else
 						li.addmarginleft
 							a(href="/login") 请登录

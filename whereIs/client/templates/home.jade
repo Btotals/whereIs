@@ -20,25 +20,6 @@ template(name="home")
 			.col-md-3#rank
 				+ranklist
 
-<<<<<<< HEAD
-template(name="newQuestions")
-<<<<<<< HEAD
-	.panel.panel-default
-		.text-left.panel-heading
-			.panel-title 最新问题
-		.panel-body
-			each nQuestions
-				+newItem
-
-template(name="hotQuestions")
-	.panel.panel-default
-		.text-left.panel-heading
-			.panel-title 最热问题
-		.panel-body
-			each tQuestions
-				+hotItem
-=======
->>>>>>> CuiH-master
 
 template(name="newItem")
 	.ui.divided.items
@@ -67,68 +48,6 @@ template(name="hotItem")
 				span.pull-right #{totalAnswer}人回答
 
 template(name="ranklist")
-<<<<<<< HEAD
-	.row.panel.panel-default
-		.col-md-6.text-center.panel-heading.white-word
-			.label.label-primary.panel-title 周百事通
-		.col-md-6.text-center.panel-heading.white-word
-			.label.label-default.panel-title 月百事通
-		.row.panel-body
-			ul.list-group
-				each Users
-					+userItem
-
-
-template(name="userItem")
-	li.list-group-item
-=======
-	h1.text-left 最新问题
-	+question
-	+question
-	+question
-	+question
-	+question
-
-template(name="hotQuestions")
-	h1.text-left 最热问题
-	+question
-	+question
-	+question
-	+question
-	+question
-
-template(name="question")
-	.row.shift-down-1vh
-		.col-md-2
-			img(src="images/u10.png")
-		.col-md-4
-			span.h5 大学城哪里可以吃到山西小米<br>
-			span.h6 发布于：2015.5.22 
-			span.h6.shift-left-1vw 悬赏分数：0
-		.col-md-4.col-md-offset-2
-			span 4人参与了回答
-
-template(name="ranklist")
-	.row
-		.col-md-6.h4.text-center 
-			span.label.label-primary 周百事通
-		.col-md-6.h4.text-center
-			span.label.label-default 月百事通
-	.row
-		+ranker
-		+ranker
-		+ranker
-		+ranker
-		+ranker
-
-template(name="ranker")
-	.shift-down-1vh
->>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd
-		.row
-			.col-md-4.h2.text-center 1
-			.col-md-4
-				img.shift-down-1vh(src="images/u66.png")
-=======
 	ul#myTab.nav.nav-tabs
 		li.active
 			a(href='#home', data-toggle='tab') 周百事通
@@ -154,16 +73,10 @@ template(name="userItem")
 				img.img-circle(src="/images/u66.png"
 								 height="40"
 								 width="40")
->>>>>>> CuiH-master
 			.col-md-4
-<<<<<<< HEAD
 				span.h5 
 					a(href='/profile/#{_id}') #{profile.nickname}
 				br
 				span.h6 积分: #{profile.score}
 	.row
 		span.h6 <br>
-=======
-				span.h5 黑猫警长<br>
-				span.h6 积分：1000
->>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd

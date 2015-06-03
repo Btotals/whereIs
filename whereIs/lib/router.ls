@@ -4,7 +4,17 @@ Router.configure {
 	layoutTemplate: 'layout'
 }
 
-Router.route '/', {name: 'home'}
+Router.route '/',  (eee) !->
+	top5Users = Meteor.users.find {}, {sort: {'profile.score': -1}, limit: 5}
+	top5Questions = Questions.find {}, {sort: {'totalAnswer': -1}, limit: 5}
+	new5Questions = Questions.find {}, {sort: {'addTime': -1}, limit: 5}
+	this.render 'home', {
+		data: -> {
+			Users: top5Users,
+			tQuestions: top5Questions,
+			nQuestions: new5Questions
+		}
+	}
 
 Router.route '/register', {name: 'register'}
 
@@ -13,16 +23,20 @@ Router.route '/login', {name: 'login'}
 Router.route '/logout', !->
 	Meteor.logout (err)->
 		if err then alert 'fail!'
-		else Router.go '/'
+		Router.go '/login'
 
-Router.route '/profile', {name: 'profile'}
+Router.route '/profile/:_id', (eee) !->
+	this.render 'profile', {
+		data: -> {
+			User: Meteor.users.findOne this.params._id
+		}
+	}
 
 Router.route '/addquestion', {name: 'addQuestion'}
 
 Router.route '/questiondetail/:_id', (eee) !->
 	this.render 'questionDetail', {
 		data: -> {
-<<<<<<< HEAD
 			Question: Questions.findOne this.params._id
 		}
 	}
@@ -45,23 +59,17 @@ Router.route '/browse/:_category/solved/:_page', (eee) !->
 
 Router.route '/browse/:_category/unsolved/:_page', (eee) !->
 	itemPerPage = 2
-=======
-			Questions: Quesitions.findOne this.params._id
-		}
-	}
-
-Router.route '/browse/:_category/:_page', (eee) !->
-	itemPerPage = 1
->>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd
 	itemMin = itemPerPage*((parseInt this.params._page)-1)
 	itemMax = itemPerPage*(parseInt this.params._page)-1
-	ques = Questions.find {category: this.params._category}, {skip: itemMin, limit: itemPerPage}
-	console.log ques
-	if ques.count! is 0
-		ques = 0
-	this.render 'browse', {
+
+	unsolvedQues = Questions.find {category: this.params._category, isHandled: false}, {skip: itemMin, limit: itemPerPage}
+
+	if unsolvedQues.count! is 0
+		unsolvedQues = 0
+
+	this.render 'unsolvedBrowse', {
 		data: -> {
-			Questions: ques
+			unsolvedQuestions: unsolvedQues
 		}
 	}
 
@@ -83,5 +91,13 @@ requireLogin = (e)!->
 	else
 		this.next!
 
-Router.onBeforeAction requireLogin, {only: 'profile'}
+logged = (e)!->
+	if Meteor.user!
+		Router.go '/'
+	else
+		this.next!
+
 Router.onBeforeAction requireLogin, {only: 'addQuestion'}
+
+Router.onBeforeAction logged, {only: 'login'}
+Router.onBeforeAction logged, {only: 'register'}
