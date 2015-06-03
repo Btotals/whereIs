@@ -2,43 +2,32 @@ Template.layout.helpers {
 	isEatCloth: ->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
-
-		items = items.slice -4
-		items.splice 0, 0, ''
-
 		items.pop!
-		return ((items.join '/') is '/browse/eatCloth/unsolved') or ((items.join '/') is '/browse/eatCloth/solved')
+		return (items.join '/') is '/browse/eatCloth'
 
 	isLiveWalk: ->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
-
-		items = items.slice -4
-		items.splice 0, 0, ''
-
 		items.pop!
-		return (items.join '/') is '/browse/liveWalk/unsolved' or (items.join '/') is '/browse/liveWalk/solved'
+		return (items.join '/') is '/browse/liveWalk'
 
 	isStudy: ->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
-
-		items = items.slice -4
-		items.splice 0, 0, ''
-
 		items.pop!
-		return (items.join '/') is '/browse/study/unsolved' or (items.join '/') is '/browse/study/solved'
+		return (items.join '/') is '/browse/study'
 
 	isOther: ->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
-
-		items = items.slice -4
-		items.splice 0, 0, ''
-		
 		items.pop!
+<<<<<<< HEAD
 		return (items.join '/') is '/browse/other/unsolved' or (items.join '/') is '/browse/other/solved'
 }
 
 # Template.layout.onRendered !->
 # 	$ '.ui.dropdown' .dropdown!
+=======
+		return (items.join '/') is '/browse/other'
+}
+>>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd

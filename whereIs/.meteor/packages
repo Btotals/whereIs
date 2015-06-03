@@ -15,9 +15,12 @@ vasaka:livescript-compiler
 mquandalle:jade
 iron:router
 stevezhu:sass
+<<<<<<< HEAD
 accounts-base
 tsega:bootstrap3-datetimepicker
 twbs:bootstrap
 semantic:ui-button
 semantic:ui-css
 semantic:ui-dropdown
+=======
+>>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd

@@ -1,24 +1,35 @@
-template(name="solvedBrowse")
+template(name="browse")
 	.container
 		.row
 			.col-md-10
 				ul#myTab.nav.nav-tabs.addmarginbotton.addmargintop2
 					li.active
-						a(href='/browse/#{nowCategory}/solved/1') 已解决
+						a(href='#solve', data-toggle='tab')
+							| 已解决
 					li
-						a(href='/browse/#{nowCategory}/unsolved/1') 待解决
+						a(href='#answer', data-toggle='tab') 待解决
 				#myTabContent.tab-content
 					#solved.tab-pane.fade.in.active
+<<<<<<< HEAD
 						each solvedQuestions
+=======
+						+title
+						each Questions
+>>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd
 							{{> questionItem}}
 					#unsolved.tab-pane.fade
+						+title
+						each Questions
+							{{> questionItem}}
 
 			.col-md-3.col-md-offset-4
 				ul.pagination.center
 					li
-						a(href='#{prevPage}') 上一页
-					
+						a(href='#{prevPage}') «
+					li.active
+						a(href='#') 1
 					li
+<<<<<<< HEAD
 						a(href='#{nextPage}') 下一页
 
 template(name="unsolvedBrowse")
@@ -38,14 +49,21 @@ template(name="unsolvedBrowse")
 
 			.col-md-3.col-md-offset-4
 				ul.pagination.center
+=======
+						a(href='#') 2
 					li
-						a(href='#{prevPage}') 上一页
-					
+						a(href='#') 3
+>>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd
 					li
-						a(href='#{nextPage}') 下一页
+						a(href='#') 4
+					li
+						a(href='#') 5
+					li
+						a(href='#{nextPage}') »
 
 
 template(name="questionItem")
+<<<<<<< HEAD
 	.ui.divided.items
 		.link.item
 			.ui.tiny.image.resetwidth
@@ -59,3 +77,12 @@ template(name="questionItem")
 				span.pull-right #{totalAnswer}人回答
 	.ui.divider
 	
+=======
+	.row.shift-down-1vh
+		.col-md-7
+			a(href="/") #{title}
+		.col-md-3
+			h5.text-center #{totalAsk}
+		.col-md-2
+			h5.text-center #{addTime}
+>>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd

@@ -20,6 +20,7 @@ a:hover {
 	text-decoration: none;
 }
 
+<<<<<<< HEAD
 .removemarginleft {
 	margin-left: 0 !important;
 }
@@ -31,3 +32,5 @@ a:hover {
 .white-word {
 	color: white !important;
 }
+=======
+>>>>>>> cee88a2d2837fb3f79fda0a5746bf47c554c11cd
