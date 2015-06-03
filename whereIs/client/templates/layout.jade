@@ -59,14 +59,22 @@ template(name="layout")
 								span.caret
 							ul.dropdown-menu.dropdown-menu-right(role="menu")
 								li
-									a(href="/profile/#{currentUser._id}") 我的主页
+									a(href="/profile/#{currentUser._id}") 
+										span(aria-hidden="true").glyphicon.glyphicon-home
+										span 我的主页
 								li
-									a(href="#") 个人设置
+									a(href="#")
+										span(aria-hidden="true").glyphicon.glyphicon-cog
+										span 个人设置
 								li
-									a(href="/addquestion") 提问
+									a(href="/addquestion") 
+										span(aria-hidden="true").glyphicon.glyphicon-question-sign
+										span 提问
 								li.divider
 								li
-									a(href="/logout") 注销
+									a(href="/logout")
+										span(aria-hidden="true").glyphicon.glyphicon-log-out
+										span 注销
 					else
 						li
 							a(href="/login") 请登录

@@ -8,14 +8,20 @@ template(name="home")
 				+ranklist
 
 template(name="newQuestions")
-	h1.text-left 最新问题
-	each nQuestions
-		{{> newItem}}
+	.panel.panel-default
+		.text-left.panel-heading
+			.panel-title 最新问题
+		.panel-body
+			each nQuestions
+				+newItem
 
 template(name="hotQuestions")
-	h1.text-left 最热问题
-	each tQuestions
-		{{> hotItem}}
+	.panel.panel-default
+		.text-left.panel-heading
+			.panel-title 最热问题
+		.panel-body
+			each tQuestions
+				+hotItem
 
 template(name="newItem")
 	.row.shift-down-1vh
@@ -44,21 +50,23 @@ template(name="hotItem")
 			span #{totalAnswer}人参与了回答
 
 template(name="ranklist")
-	.row
-		.col-md-6.h4.text-center 
-			span.label.label-primary 周百事通
-		.col-md-6.h4.text-center
-			span.label.label-default 月百事通
-	.row
-		each Users
-			{{> userItem}}
+	.row.panel.panel-default
+		.col-md-6.text-center.panel-heading.white-word
+			.label.label-primary.panel-title 周百事通
+		.col-md-6.text-center.panel-heading.white-word
+			.label.label-default.panel-title 月百事通
+		.row.panel-body
+			ul.list-group
+				each Users
+					+userItem
+
 
 template(name="userItem")
-	.shift-down-1vh
+	li.list-group-item
 		.row
-			.col-md-4.h2.text-center ·
+			.col-md-4.h2.text-center 1
 			.col-md-4
-				img(src="images/u66.png")
+				img.shift-down-1vh(src="images/u66.png")
 			.col-md-4
 				span.h5 
 					a(href='/profile/#{_id}') #{profile.nickname}
