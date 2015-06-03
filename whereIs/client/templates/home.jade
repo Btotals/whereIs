@@ -22,26 +22,22 @@ template(name="newItem")
 		.col-md-2
 			img(src="images/u10.png")
 		.col-md-5
-			span.h5
-				a(href='/questiondetail/#{_id}') #{title}
-				br
+			span.h5 #{title}<br>
 			span.h6 发布于：#{addTime}
 			span.h6.shift-left-1vw 悬赏分数：#{reward}
 		.col-md-4.col-md-offset-2.removemarginleft
-			span #{totalAnswer}人参与了回答
+			span #{totalAsk}人参与了回答
 
 template(name="hotItem")
 	.row.shift-down-1vh
 		.col-md-2
 			img(src="images/u10.png")
 		.col-md-5
-			span.h5
-				a(href='/questiondetail/#{_id}') #{title}
-				br
+			span.h5 #{title}<br>
 			span.h6 发布于：#{addTime}
 			span.h6.shift-left-1vw 悬赏分数：#{reward}
 		.col-md-4.col-md-offset-2.removemarginleft
-			span #{totalAnswer}人参与了回答
+			span #{totalAsk}人参与了回答
 
 template(name="ranklist")
 	.row
