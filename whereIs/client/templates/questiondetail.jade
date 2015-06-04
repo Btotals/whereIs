@@ -54,4 +54,7 @@ template(name="answerItem")
 		.agree
 			button.btn.btn-default 赞同
 			button.btn.btn-default 反对
+			if isAuthorAndHasNoBest
+				button#selectBest(answerer='#{answererId}').btn.btn-default 采纳
 	.ui.divider
+		
