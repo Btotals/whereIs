@@ -48,79 +48,86 @@ template(name="layout")
 	//- 				a.item
 	//- 					i.user.icon
 	//- 					| 请登录
+	.yield-content
+		nav.navbar.navbar-default
+			.container-fluid
+				.navbar-header
+					button(
+						type="button"
+						class="navbar-toggle collapsed"
+						data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1"
+					)
+						span.sr-only Toggle navigation
+						//- span.icon-bar
+						//- span.icon-bar
+						//- span.icon-bar
+					a.navbar-brand#logo-brand(href="/") 哪有
 
-	nav.navbar.navbar-default
-		.container-fluid
-			.navbar-header
-				button(
-					type="button"
-					class="navbar-toggle collapsed"
-					data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1"
-				)
-					span.sr-only Toggle navigation
-					//- span.icon-bar
-					//- span.icon-bar
-					//- span.icon-bar
-				a.navbar-brand#logo-brand(href="/") 哪有
+				.collapse.navbar-collapse#bs-example-navbar-collapse-1
+					ul.nav.navbar-nav.navbar-left.addmarginleft
+						if isEatCloth
+							li.active
+								a(href="/browse/eatCloth/solved/1") 衣食
+						else
+							li
+								a(href="/browse/eatCloth/solved/1") 衣食
+						if isLiveWalk
+							li.active
+								a(href="/browse/liveWalk/solved/1") 住行
+						else
+							li
+								a(href="/browse/liveWalk/solved/1") 住行
+						if isStudy
+							li.active
+								a(href="/browse/study/solved/1") 学习
+						else
+							li
+								a(href="/browse/study/solved/1") 学习
+						if isOther
+							li.active
+								a(href="/browse/other/solved/1") 其它
+						else
+							li
+								a(href="/browse/other/solved/1") 其它
 
-			.collapse.navbar-collapse#bs-example-navbar-collapse-1
-				form.navbar-form.navbar-left(role="search")
-					.ui.icon.input
-						input.prompt(type="text", placeholder="哪有...", autocomplete="off")
-						i.search.icon
-					a.btn.btn-default(href="/addquestion", role="button") 我要提问
-				ul.nav.navbar-nav.navbar-left
-					if isEatCloth
-						li.active
-							a(href="/browse/eatCloth/solved/1") 衣食
-					else
-						li
-							a(href="/browse/eatCloth/solved/1") 衣食
-					if isLiveWalk
-						li.active
-							a(href="/browse/liveWalk/solved/1") 住行
-					else
-						li
-							a(href="/browse/liveWalk/solved/1") 住行
-					if isStudy
-						li.active
-							a(href="/browse/study/solved/1") 学习
-					else
-						li
-							a(href="/browse/study/solved/1") 学习
-					if isOther
-						li.active
-							a(href="/browse/other/solved/1") 其他
-					else
-						li
-							a(href="/browse/other/solved/1") 其他
-					
-					if currentUser
-						li.dropdown.addmarginleft
-							a.dropdown-toggle(
-								data-toggle="dropdown"
-								role="button"
-								aria-expanded="false"
-								href="#"
-							) #{currentUser.profile.nickname}
-								span.caret
+					form.navbar-form.navbar-left(role="search")
+						.form-group
+							input.form-control(type="text", placeholder="哪有...", autocomplete="off")
+							button.btn.btn-default(type="submit") 搜索
 
-							ul.dropdown-menu.dropdown-menu-right(role="menu")
-								li
-									a(href="/profile/#{currentUser._id}") 
-										span(aria-hidden="true").glyphicon.glyphicon-home
-										span 我的主页
-								li.divider
-								li
-									a(href="/logout")
-										span(aria-hidden="true").glyphicon.glyphicon-log-out
-										span 注销
+						a.btn.btn-default(href="/addquestion", role="button") 我要提问
 
+					ul.nav.navbar-nav.navbar-left.addmarginleft
+						if currentUser
+							li.dropdown.addmarginleft
+								a.dropdown-toggle(
+									data-toggle="dropdown"
+									role="button"
+									aria-expanded="false"
+									href="#"
+								) #{currentUser.profile.nickname}
+									span.caret
 
-					else
-						li.addmarginleft
-							a(href="/login") 请登录
-	{{> yield}}
-	//- .ui.divider.addmargintop
-	//- |group 7
+								ul.dropdown-menu.dropdown-menu-right(role="menu")
+									li
+										a(href="/profile/#{currentUser._id}") 
+											span(aria-hidden="true").glyphicon.glyphicon-home
+											span 我的主页
+									li.divider
+									li
+										a(href="/logout")
+											span(aria-hidden="true").glyphicon.glyphicon-log-out
+											span 注销
+						else
+							li.addmarginleft
+								a(href="/login") 请登录
+								
+		{{> yield}}
+		//- .ui.divider.addmargintop
+		//- |group 7
+	.footer
+		.ui.divider
+		p.setmiddle @2015 SPI GROUP7
+			a(href='https://github.com/Btotals/whereIs') View in Github
+

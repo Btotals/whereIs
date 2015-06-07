@@ -22,7 +22,7 @@ Template['profile'].helpers {
 		totalAnswer = +(this.User.profile['totalAnswer'])
 		if totalAnswer is 0
 			return '0%'
-		return (totalBest/totalAnswer).toFixed(2)*100 + '%'
+		return parseInt((totalBest/totalAnswer).toFixed(2)*100) + '%'
 
 }
 

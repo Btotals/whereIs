@@ -26,10 +26,16 @@ Template.register.events {
 		password = t.find '#password' .value
 		email = t.find '#email' .value
 
+		myemailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
+		bChk = myemailReg.test email
+		if not bChk
+			alert '邮箱格式不正确！'
+			return
+
 		Accounts.create-user {email: email, password: password, 
 		profile: {nickname: nickname, gender:'male', birthdate: '2000-01-01', college: 'unknown', score: 0,
 		totalAsk: 0, totalAnswer: 0, totalLike: 0, totalBest: 0, uploadHead: false,
 		answers: [], questions: []}}, (err)->
-			if err then console.log err
+			if err then alert err.reason
 			else Router.go '/profile'
 }
