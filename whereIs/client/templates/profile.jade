@@ -64,7 +64,7 @@ template(name="profile")
 					thead
 						tr
 							th 标题
-							th 悬赏分
+							th 热度
 							th 是否被采纳
 							th 时间
 					tbody
@@ -142,7 +142,7 @@ template(name="profile")
 								span(aria-hidden="true") &#215;
 							h4.modal-title 修改密码
 						.modal-body
-							form#password(role='form')
+							form#password.resetwidthandheight(role='form')
 								| 原密码
 								input#oldPassword.form-control(type='password', placeholder='原密码')
 								br
@@ -169,8 +169,8 @@ template(name="myQuestions")
 template(name="myAnswers")
 	tr
 		th(scope="row")
-			a(href='/questiondetail/#{questionId}') #{title}
-		td #{reward}
+			a(href='/questiondetail/#{questionId}') Re:#{title}
+		td #{heat}
 		if isBest
 			td 是
 		else

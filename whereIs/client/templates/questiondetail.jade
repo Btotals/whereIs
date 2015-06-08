@@ -9,10 +9,13 @@ template(name="questionDetail")
 								i.icon.inverted.circular.blue.comment
 								| #{Question.title}
 							p.resetfontsize #{Question.content}
-							span.time 发布者：#{Question.askerNickname}
+							span.time 发布者：
+								a(href='/profile/#{Question.askerID}') #{Question.askerNickname}
+							span.time 所属类别：
+								a(href='/browse/#{Question.category}/unsolved/1') #{category}
 							span.time 悬赏分：#{Question.reward}
 							span.time 发布时间：#{Question.addTime}
-		
+
 			.answer
 				if bestAnswer
 					.ui.two.column.grid
@@ -20,14 +23,8 @@ template(name="questionDetail")
 							.column.resetwidth4
 								.ui.raised.segment
 									.ui.red.ribbon.label 最佳答案
-									p.resetfontsize #{bestAnswer.content}
-									span.time 回答者：
-										a(href='/profile/#{bestAnswer.answererId}') #{bestAnswer.answererNickname}
-									span.time 回答时间：#{bestAnswer.addTime}
-									span.time 热度：#{bestAnswer.heat}
-										.agree
-											button.btn.btn-default 赞同
-											button.btn.btn-default 反对
+									each bestAnswer
+										{{> bestAnswerItem}}
 
 				.ansert_other
 					.ui.two.column.grid
@@ -39,22 +36,45 @@ template(name="questionDetail")
 										each otherAnswers
 											{{> answerItem}}
 									.ui.ribbon.label 我来回答
-									form(role="form", method="post").ui.reply.form
+									form(role="form", method="post").ui.reply.form.addmargintop3
 										.field
 											textarea(name='answerContent',required)
-											input.addmargintop3.pull-right.btn.btn-warning(type="submit", value="Submit")
+											input.addmargintop3.pull-right.btn.btn-warning(type="submit", value="提交")
 
 template(name="answerItem")
-	p.resetfontsize #{content}
+	p.addmargintop3.resetfontsize #{content}
 		
 	span.time 回答者：
 		a(href='/profile/#{answererId}') #{answererNickname}
 	span.time 回答时间：#{addTime}
-	span.time 热度：#{heat}
-		.agree
-			button.btn.btn-default 赞同
-			button.btn.btn-default 反对
-			if isAuthorAndHasNoBest
-				button#selectBest(answerer='#{answererId}').btn.btn-default 采纳
+	.ui.buttons
+		button#approve.ui.labeled.icon.button
+			i.left.chevron.icon
+			| 赞同
+		.ui.button
+			| #{heat}
+		button#against.ui.right.labeled.icon.button
+			| 反对
+			i.right.chevron.icon
+	if isAuthorAndHasNoBest
+		button#selectBest(answerer='#{answererId}').positive.ui.button 采纳为最佳答案
 	.ui.divider
+
+template(name="bestAnswerItem")
+	p.addmargintop3.resetfontsize #{content}
+	span.time 回答者：
+		a(href='/profile/#{answererId}') #{answererNickname}
+	span.time 回答时间：#{addTime}
+	.ui.buttons
+		button#best-approve.ui.labeled.icon.button
+			i.left.chevron.icon
+			| 赞同
+		.ui.button
+			| #{heat}
+		button#best-against.ui.right.labeled.icon.button
+			| 反对
+			i.right.chevron.icon
+		//- .agree
+		//- 	button#best-approve.btn.btn-default 赞同
+		//- 	button#best-against.btn.btn-default 反对
 		

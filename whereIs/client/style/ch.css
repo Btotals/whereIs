@@ -66,3 +66,17 @@
 .addmarginbotton {
 	margin-bottom: 30px;
 }
+
+.resetwidthandheight {
+	width: auto!important;
+	height: auto!important;
+}
+
+.yield-content {
+	min-height: 650px;
+}
+
+.setmiddle {
+	text-align: center;
+	color: grey;
+}

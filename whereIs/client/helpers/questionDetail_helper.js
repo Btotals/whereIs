@@ -12,7 +12,6 @@ Template['questionDetail'].events({
 	'click #selectBest': function(e) {
 		e.preventDefault();
 
-		var answererId = $("#selectBest").attr("answerer");
 
 		var curUrl = Router.current().url;
 		var items = curUrl.split('/');
@@ -26,8 +25,9 @@ Template['questionDetail'].events({
 		var answers = question.answers;
 
 		for (var i = 0; i < answers.length; i++) {
-			if (answers[i].answererId == answererId) {
+			if (answers[i].answererId == this.answererId) {
 				answers[i].isBest = true;
+				break;
 			}
 		}
 
@@ -35,7 +35,7 @@ Template['questionDetail'].events({
 			$set: {answers: answers, isHandled: true}
 		}, function(error) {
 			if (error) {
-				alert("失败");
+				alert(error.reason);
 			} else {
 				alert("成功");
 			}
@@ -43,7 +43,7 @@ Template['questionDetail'].events({
 
 
 		// 回答者totalBest加一，answers中该问题isBest，积分加悬赏分
-		var answerer = Meteor.users.findOne(answererId);
+		var answerer = Meteor.users.findOne(this.answererId);
 
 		var answererScore = answerer.profile.score;
 		var answererBest = answerer.profile.totalBest;
@@ -56,11 +56,11 @@ Template['questionDetail'].events({
 			}
 		}
 		
-		Meteor.users.update(answererId, {
+		Meteor.users.update(this.answererId, {
 			$set: {'profile.score': answererScore+question.reward, 'profile.totalBest': answererBest+1, 'profile.answers': answererAnswers}
 		}, function(error) {
 			if (error) {
-				console.log("处理回答者失败");
+				console.log(error.reason);
 			} else {
 				console.log("处理回答者成功");
 			}
@@ -82,7 +82,7 @@ Template['questionDetail'].events({
 			$set: {'profile.questions': askerQuestions}
 		}, function(error) {
 			if (error) {
-				console.log("处理提问者失败");
+				console.log(error.reason);
 			} else {
 				console.log("处理提问者成功");
 			}
@@ -93,7 +93,11 @@ Template['questionDetail'].events({
 		e.preventDefault();
 
 
-		// 每个问题只能回答一次，不能回答自己的问题
+		// 每个问题只能回答一次，不能回答自己的问题,登陆才能回答
+		if (!Meteor.user()) {
+			alert('请先登录！');
+			Router.go('/login');
+		}
 		var answers = this.Question.answers;
 		for (var i = 0; i < answers.length; i++) {
 			if (answers[i].answererId == Meteor.user()._id) {
@@ -155,7 +159,7 @@ Template['questionDetail'].events({
 			$set: {answers: answers, totalAnswer: count}
 		}, function(error) {
 			if (error) {
-				alert("失败");
+				alert(error.reason);
 			} else {
 				alert("成功,,获得5积分！");
 			}
@@ -168,9 +172,9 @@ Template['questionDetail'].events({
 		var targetQuestion = {
 			questionId: this.Question._id,
 			title: this.Question.title,
-			addTime: this.Question.addTime,
+			addTime: answer.addTime,
 			category: this.Question.category,
-			reward: this.Question.reward,
+			heat: 0,
 			isBest: false              // whether this user's answer is selected to be the best one
 		}
 		myAnswers.push(targetQuestion);
@@ -181,9 +185,327 @@ Template['questionDetail'].events({
 			$set: {'profile.answers': myAnswers, 'profile.totalAnswer': count, 'profile.score': score+5}
 		}, function(error) {
 			if (error) {
-				console.log("回答者的answers中加入该问题失败");
+				console.log(error.reason);
 			} else {
 				console.log("回答者的answers中加入该问题成功");
+			}
+		});
+	},
+
+	'click #approve': function(e) {
+		e.preventDefault();
+
+
+		// 登陆才可以点赞
+		if (!Meteor.user()) {
+			alert("登陆后才可以进行该操作!");
+			return;
+		}
+
+
+		// 不能评价自己的评论
+		if (Meteor.user()._id == this.answererId) {
+			alert("不能评价自己的评论!");
+			return;
+		}
+
+
+		// 每个人只能对每条评论评价一次
+		var viewers = this.viewers;
+
+		for (var i = 0; i < viewers.length; i++) {
+			if (Meteor.user()._id == viewers[i]) {
+				alert("你已评价过这条评论！");
+				return;
+			}
+		}
+
+
+		// 该评论的viewers中加入当前用户ID, 该评论heat+1
+		var curUrl = Router.current().url;
+		var items = curUrl.split('/');
+		var questionId = items[items.length-1];
+		var question = Questions.findOne(questionId);
+
+		var answers = question.answers;
+
+		for (i = 0; i < answers.length; i++) {
+			if (answers[i].answererId == this.answererId) {
+				answers[i].viewers.push(Meteor.user()._id);
+				answers[i].heat += 1;
+				break;
+			}
+		}
+
+		Questions.update(questionId, {
+			$set: {answers: answers}
+		}, function(error) {
+			if (error) {
+				alert(error.reason);
+			} else {
+				alert("成功");
+			}
+		});
+
+
+		// 该用户被赞数+1,对应回答被赞数+1
+		var answerer = Meteor.users.findOne(this.answererId);
+
+		var answererAnswers = answerer.profile.answers;
+		var answererLikes = answerer.profile.totalLike;
+
+		for (i = 0; i < answererAnswers.length; i++) {
+			if (answererAnswers[i].questionId == questionId) {
+				answererAnswers[i].heat += 1;
+				break;
+			}
+		}
+		
+		Meteor.users.update(this.answererId, {
+			$set: {'profile.totalLike': answererLikes+1, 'profile.answers': answererAnswers}
+		}, function(error) {
+			if (error) {
+				console.log(error.reason);
+			} else {
+				console.log("处理回答者成功");
+			}
+		});
+	},
+
+	'click #best-approve': function(e) {
+		e.preventDefault();
+
+
+		// 登陆才可以点赞
+		if (!Meteor.user()) {
+			alert("登陆后才可以进行该操作!");
+			return;
+		}
+
+
+		// 不能评价自己的评论
+		if (Meteor.user()._id == this.answererId) {
+			alert("不能评价自己的评论!");
+			return;
+		}
+
+
+		// 每个人只能对每条评论评价一次
+		var viewers = this.viewers;
+
+		for (var i = 0; i < viewers.length; i++) {
+			if (Meteor.user()._id == viewers[i]) {
+				alert("你已评价过这条评论！");
+				return;
+			}
+		}
+
+
+		// 该评论的viewers中加入当前用户ID, 该评论heat+1
+		var curUrl = Router.current().url;
+		var items = curUrl.split('/');
+		var questionId = items[items.length-1];
+		var question = Questions.findOne(questionId);
+
+		var answers = question.answers;
+
+		for (i = 0; i < answers.length; i++) {
+			if (answers[i].answererId == this.answererId) {
+				answers[i].viewers.push(Meteor.user()._id);
+				answers[i].heat += 1;
+				break;
+			}
+		}
+
+		Questions.update(questionId, {
+			$set: {answers: answers}
+		}, function(error) {
+			if (error) {
+				alert(error.reason);
+			} else {
+				alert("成功");
+			}
+		});
+
+
+		// 该用户被赞数+1,对应回答被赞数+1
+		var answerer = Meteor.users.findOne(this.answererId);
+
+		var answererAnswers = answerer.profile.answers;
+		var answererLikes = answerer.profile.totalLike;
+
+		for (i = 0; i < answererAnswers.length; i++) {
+			if (answererAnswers[i].questionId == questionId) {
+				answererAnswers[i].heat += 1;
+				break;
+			}
+		}
+		
+		Meteor.users.update(this.answererId, {
+			$set: {'profile.totalLike': answererLikes+1, 'profile.answers': answererAnswers}
+		}, function(error) {
+			if (error) {
+				console.log(error.reason);
+			} else {
+				console.log("处理回答者成功");
+			}
+		});
+	},
+
+	'click #best-against': function(e) {
+		e.preventDefault();
+
+
+		// 登陆才可以点赞
+		if (!Meteor.user()) {
+			alert("登陆后才可以进行该操作!");
+			return;
+		}
+
+
+		// 不能评价自己的评论
+		if (Meteor.user()._id == this.answererId) {
+			alert("不能评价自己的评论!");
+			return;
+		}
+
+
+		// 每个人只能对每条评论评价一次
+		var viewers = this.viewers;
+
+		for (var i = 0; i < viewers.length; i++) {
+			if (Meteor.user()._id == viewers[i]) {
+				alert("你已评价过这条评论！");
+				return;
+			}
+		}
+
+
+		// 该评论的viewers中加入当前用户ID, 该评论heat+1
+		var curUrl = Router.current().url;
+		var items = curUrl.split('/');
+		var questionId = items[items.length-1];
+		var question = Questions.findOne(questionId);
+
+		var answers = question.answers;
+
+		for (i = 0; i < answers.length; i++) {
+			if (answers[i].answererId == this.answererId) {
+				answers[i].viewers.push(Meteor.user()._id);
+				answers[i].heat -= 1;
+				break;
+			}
+		}
+
+		Questions.update(questionId, {
+			$set: {answers: answers}
+		}, function(error) {
+			if (error) {
+				alert(error.reason);
+			} else {
+				alert("成功");
+			}
+		});
+
+
+		// 该用户被赞数+1,对应回答被赞数+1
+		var answerer = Meteor.users.findOne(this.answererId);
+
+		var answererAnswers = answerer.profile.answers;
+
+		for (i = 0; i < answererAnswers.length; i++) {
+			if (answererAnswers[i].questionId == questionId) {
+				answererAnswers[i].heat -= 1;
+				break;
+			}
+		}
+		
+		Meteor.users.update(this.answererId, {
+			$set: {'profile.answers': answererAnswers}
+		}, function(error) {
+			if (error) {
+				console.log(error.reason);
+			} else {
+				console.log("处理回答者成功");
+			}
+		});
+	},
+
+	'click #against': function(e) {
+		e.preventDefault();
+
+
+		// 登陆才可以点赞
+		if (!Meteor.user()) {
+			alert("登陆后才可以进行该操作!");
+			return;
+		}
+
+
+		// 不能评价自己的评论
+		if (Meteor.user()._id == this.answererId) {
+			alert("不能评价自己的评论!");
+			return;
+		}
+
+
+		// 每个人只能对每条评论评价一次
+		var viewers = this.viewers;
+
+		for (var i = 0; i < viewers.length; i++) {
+			if (Meteor.user()._id == viewers[i]) {
+				alert("你已评价过这条评论！");
+				return;
+			}
+		}
+
+
+		// 该评论的viewers中加入当前用户ID, 该评论heat+1
+		var curUrl = Router.current().url;
+		var items = curUrl.split('/');
+		var questionId = items[items.length-1];
+		var question = Questions.findOne(questionId);
+
+		var answers = question.answers;
+
+		for (i = 0; i < answers.length; i++) {
+			if (answers[i].answererId == this.answererId) {
+				answers[i].viewers.push(Meteor.user()._id);
+				answers[i].heat -= 1;
+				break;
+			}
+		}
+
+		Questions.update(questionId, {
+			$set: {answers: answers}
+		}, function(error) {
+			if (error) {
+				alert(error.reason);
+			} else {
+				alert("成功");
+			}
+		});
+
+
+		// 该用户被赞数+1,对应回答被赞数+1
+		var answerer = Meteor.users.findOne(this.answererId);
+
+		var answererAnswers = answerer.profile.answers;
+
+		for (i = 0; i < answererAnswers.length; i++) {
+			if (answererAnswers[i].questionId == questionId) {
+				answererAnswers[i].heat -= 1;
+				break;
+			}
+		}
+		
+		Meteor.users.update(this.answererId, {
+			$set: {'profile.answers': answererAnswers}
+		}, function(error) {
+			if (error) {
+				console.log(error.reason);
+			} else {
+				console.log("处理回答者成功");
 			}
 		});
 	}

@@ -1,8 +1,10 @@
 Template.questionDetail.helpers {
 	bestAnswer: !->
+		theBest = []
 		for answer in this.Question.answers
 			if answer.isBest is true
-				return answer
+				theBest.push answer
+				return theBest
 		return 0
 
 	otherAnswers: !->
@@ -11,14 +13,27 @@ Template.questionDetail.helpers {
 			if answer.isBest is false
 				answers.push answer
 		return answers
+
+	category: !->
+		if this.Question.category is 'eatCloth'
+			return "衣食"
+		if this.Question.category is 'liveWalk'
+			return "住行"
+		if this.Question.category is 'study'
+			return "学习"
+		if this.Question.category is 'other'
+			return "其它"
 }
 
 Template.answerItem.helpers {
 	isAuthorAndHasNoBest: !->
-		curUrl = Router.current! .url
-		items = curUrl.split '/' 
-		questionId = items[items.length-1]
-		question = Questions.findOne questionId
+		if Meteor.user!
+			curUrl = Router.current! .url
+			items = curUrl.split '/' 
+			questionId = items[items.length-1]
+			question = Questions.findOne questionId
 
-		return (Meteor.user!._id is question.askerID) and !question.isHandled
+			return (Meteor.user!._id is question.askerID) and !question.isHandled
+		else
+			return false
 }
