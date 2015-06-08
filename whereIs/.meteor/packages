@@ -21,3 +21,5 @@ twbs:bootstrap
 semantic:ui-button
 semantic:ui-css
 semantic:ui-dropdown
+tomi:upload-server
+tomi:upload-jquery

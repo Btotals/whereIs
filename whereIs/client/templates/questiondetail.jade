@@ -35,6 +35,7 @@ template(name="questionDetail")
 										.ui.teal.ribbon.label 其它答案
 										each otherAnswers
 											{{> answerItem}}
+									//- if isNotAuthor
 									.ui.ribbon.label 我来回答
 									form(role="form", method="post").ui.reply.form.addmargintop3
 										.field

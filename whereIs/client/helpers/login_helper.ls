@@ -6,6 +6,9 @@ Template.login.events {
 		email = t.find '#email' .value
 
 		Meteor.login-with-password email, password, (err)->
-			if err then alert err.reason
-			else Router.go '/profile'
+			if err then
+				alert err.reason
+			else
+				Meteor.call 'updateCurrentUser'
+				Router.go '/profile'
 }

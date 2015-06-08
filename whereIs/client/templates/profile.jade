@@ -74,7 +74,7 @@ template(name="profile")
 		.ui.cards.resetwidth5.addmargintop2
 			.card
 				.image
-					img(src="/images/u66.png")
+					img(src="/images/#{User.profile.avatar}")
 				.content
 					.header #{User.profile.nickname}
 					.meta
@@ -101,35 +101,40 @@ template(name="profile")
 						.modal-body
 							form#profiles(role='form')
 								.form-group
-									| 昵称:
-									input#nickname.form-control(type='text', value='#{User.profile.nickname}', required)
-									br
-									| 性别：
-									br
-									if isMale
-										label.radio-inline
-											input(type='radio', value='female', name='gender')
-											| 女
-										label.radio-inline
-											input(type='radio', value='male', name='gender', checked)
-											| 男
-									else 
-										label.radio-inline
-											input(type='radio', value='female', name='gender', checked)
-											| 女
-										label.radio-inline
-											input(type='radio', value='male', name='gender')
-											| 男
-									br
-									br
-									| 生日:
-									input#datetimepicker.form-control(type='text',value='#{User.profile.birthdate}', required)
-									br
-									| 学校:
-									select#college.form-control
-										option(value='SYSU') 中山大学
-										option(value='SCUT') 华南理工大学
-										option(value='GUFS') 广东外语外贸大学
+									.row
+										.col-md-7
+											| 昵称:
+											input#nickname.form-control(type='text', value='#{User.profile.nickname}', required)
+											br
+											| 性别：
+											br
+											if isMale
+												label.radio-inline
+													input(type='radio', value='female', name='gender')
+													| 女
+												label.radio-inline
+													input(type='radio', value='male', name='gender', checked)
+													| 男
+											else 
+												label.radio-inline
+													input(type='radio', value='female', name='gender', checked)
+													| 女
+												label.radio-inline
+													input(type='radio', value='male', name='gender')
+													| 男
+											br
+											br
+											| 生日:
+											input#datetimepicker.form-control(type='text',value='#{User.profile.birthdate}', required)
+											br
+											| 学校:
+											select#college.form-control
+												option(value='SYSU') 中山大学
+												option(value='SCUT') 华南理工大学
+												option(value='GUFS') 广东外语外贸大学
+										.col-md-5
+											img.avatar(src="/images/#{User.profile.avatar}")
+											+uploadAvatar
 						.modal-footer
 							button.btn.btn-default(type='button', data-dismiss='modal') 关闭
 							button#saveProfile.btn.btn-primary(type='button', data-dismiss='modal') 保存
@@ -176,4 +181,6 @@ template(name="myAnswers")
 		else
 			td 否
 		td #{addTime}
-	
+
+template(name="uploadAvatar")
+	+upload_bootstrap

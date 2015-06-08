@@ -68,6 +68,8 @@ spacebars-compiler@1.0.6
 srp@1.0.3
 stevezhu:sass@2.0.0
 templating@1.1.1
+tomi:upload-jquery@2.1.5
+tomi:upload-server@1.2.3
 tracker@1.0.7
 tsega:bootstrap3-datetimepicker@4.7.14_4
 twbs:bootstrap@3.3.4

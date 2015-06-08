@@ -23,6 +23,14 @@ Template.questionDetail.helpers {
 			return "学习"
 		if this.Question.category is 'other'
 			return "其它"
+
+	# is-not-author: ->
+	# 	cur-url = Router.current! .url
+	# 	items = curUrl.split '/' 
+	# 	question-id = items[items.length-1]
+	# 	question-owner-id = Questions.find-one question-id .asker-id
+	# 	Meteor.user!._id != question-owner-id
+
 }
 
 Template.answerItem.helpers {
