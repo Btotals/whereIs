@@ -1,4 +1,13 @@
-Template.solvedBrowse.helpers {
+Template.searchUnsolved.helpers {
+	nowKeyword: ->
+		curUrl = Router.current! .url
+		items = curUrl.split '/'
+
+		items = items.slice -4
+		items.splice 0, 0, ''
+
+		return items[2]
+
 	totalPage: !->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
@@ -6,8 +15,8 @@ Template.solvedBrowse.helpers {
 		items = items.slice -4
 		items.splice 0, 0, ''
 
-		category = items[2]
-
+		keyword = items[2]
+		
 		itemPerPage = 2
 		maxPage = parseInt((this.size+itemPerPage-1)/itemPerPage)
 		return maxPage
@@ -19,7 +28,7 @@ Template.solvedBrowse.helpers {
 		items = items.slice -4
 		items.splice 0, 0, ''
 
-		category = items[2]
+		keyword = items[2]
 		
 		itemPerPage = 2
 		maxPage = parseInt((this.size+itemPerPage-1)/itemPerPage)
@@ -44,18 +53,18 @@ Template.solvedBrowse.helpers {
 		items.pop!
 		items.push +nowPage-1
 		return items.join '/'
-
-	nowCategory: !->
-		curUrl = Router.current! .url
-		items = curUrl.split '/'
-
-		items = items.slice -4
-		items.splice 0, 0, ''
-
-		return items[2]
 }
 
-Template.unsolvedBrowse.helpers {
+Template.searchSolved.helpers {
+	nowKeyword: ->
+		curUrl = Router.current! .url
+		items = curUrl.split '/'
+
+		items = items.slice -4
+		items.splice 0, 0, ''
+
+		return items[2]
+
 	totalPage: !->
 		curUrl = Router.current! .url
 		items = curUrl.split '/'
@@ -63,7 +72,7 @@ Template.unsolvedBrowse.helpers {
 		items = items.slice -4
 		items.splice 0, 0, ''
 
-		category = items[2]
+		keyword = items[2]
 		
 		itemPerPage = 2
 		maxPage = parseInt((this.size+itemPerPage-1)/itemPerPage)
@@ -76,7 +85,7 @@ Template.unsolvedBrowse.helpers {
 		items = items.slice -4
 		items.splice 0, 0, ''
 
-		category = items[2]
+		keyword = items[2]
 		
 		itemPerPage = 2
 		maxPage = parseInt((this.size+itemPerPage-1)/itemPerPage)
@@ -101,13 +110,4 @@ Template.unsolvedBrowse.helpers {
 		items.pop!
 		items.push +nowPage-1
 		return items.join '/'
-
-	nowCategory: !->
-		curUrl = Router.current! .url
-		items = curUrl.split '/'
-
-		items = items.slice -4
-		items.splice 0, 0, ''
-
-		return items[2]
 }

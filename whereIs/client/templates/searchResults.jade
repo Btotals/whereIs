@@ -1,0 +1,49 @@
+template(name="searchSolved")
+	.container
+		.row.addmargintop2
+			h3 有关"#{nowKeyword}"的搜索结果
+		.row
+			.col-md-10
+				ul#myTab.nav.nav-tabs.addmarginbotton.addmargintop2
+					li.active
+						a(href='/search/#{nowKeyword}/solved/1') 已解决
+					li
+						a(href='/search/#{nowKeyword}/unsolved/1') 待解决
+				#myTabContent.tab-content
+					#solved.tab-pane.fade.in.active
+						each Questions
+							{{> questionItem}}
+					#unsolved.tab-pane.fade
+
+			.col-md-3.col-md-offset-4
+				ul.pagination.center
+					li
+						a(href='#{prevPage}') 上一页
+					
+					li
+						a(href='#{nextPage}') 下一页
+
+template(name="searchUnsolved")
+	.container
+		.row.addmargintop2
+			h3 有关"#{nowKeyword}"的搜索结果
+		.row
+			.col-md-10
+				ul#myTab.nav.nav-tabs.addmarginbotton.addmargintop2
+					li
+						a(href='/search/#{nowKeyword}/solved/1') 已解决
+					li.active
+						a(href='/search/#{nowKeyword}/unsolved/1') 待解决
+				#myTabContent.tab-content
+					#solved.tab-pane.fade
+					#unsolved.tab-pane.fade.in.active
+						each Questions
+							{{> questionItem}}
+
+			.col-md-3.col-md-offset-4
+				ul.pagination.center
+					li
+						a(href='#{prevPage}') 上一页
+					
+					li
+						a(href='#{nextPage}') 下一页

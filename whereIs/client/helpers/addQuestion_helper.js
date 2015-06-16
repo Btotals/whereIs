@@ -2,6 +2,17 @@ Template['addQuestion'].events({
 	'submit form': function(e){
 		e.preventDefault();
 
+		// 需选择分类
+		var flag = false;
+		var choice = $('.sort');
+		for (var i = 0; i < choice.length; i++) {
+			if ($.inArray("selected", choice[i].classList) != -1) flag = true;
+		}
+
+		if (!flag) {
+			alert("请选择问题分类！");
+			return;
+		}
 
 		// 积分足够才能发布
 		var thisReward = +($(e.target).find('[name=questionReward]').val());
@@ -47,7 +58,8 @@ Template['addQuestion'].events({
 			addTime: time,
 			askerID: Meteor.user()._id,
 			askerNickname: Meteor.user().profile.nickname,
-			category: $(e.target).find('[name=questionCategory]:checked').val(),
+//			category: $(e.target).find('[name=questionCategory]:checked').val(),
+			category: questionCategory,
 			reward: +($(e.target).find('[name=questionReward]').val()),
 			totalAnswer: 0,
 			isHandled: false,
@@ -77,10 +89,47 @@ Template['addQuestion'].events({
 				console.log("发布者的questions中加入该问题失败");
 			} else {
 				console.log("发布者的questions中加入该问题成功");
+				console.log(question.category);
 			}
 		});
 
 
 		Router.go('/questiondetail/'+question._id);
-	}
+	},
+
+	'click #clothEat': function(e){
+		e.preventDefault();
+		cancelChoice();
+		$("#clothEat").addClass('selected');
+		questionCategory = 'eatCloth';
+	},
+
+	'click #liveWalk': function(e){
+		e.preventDefault();
+		cancelChoice();
+		$("#liveWalk").addClass('selected');
+		questionCategory = 'liveWalk';
+	},
+
+	'click #study': function(e){
+		e.preventDefault();
+		cancelChoice();
+		$("#study").addClass('selected');
+		questionCategory = 'study';
+	},
+
+	'click #other': function(e){
+		e.preventDefault();
+		cancelChoice();
+		$("#other").addClass('selected');
+		questionCategory = 'other';
+	},
+
 });
+
+function cancelChoice() {
+	var choice = $('.sort');
+	for (var i = 0; i < choice.length; i++) {
+		choice[i].classList.remove("selected");
+	}
+}

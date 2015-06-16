@@ -91,10 +91,10 @@ template(name="layout")
 							li
 								a(href="/browse/other/solved/1") 其它
 
-					form.navbar-form.navbar-left(role="search")
+					.navbar-form.navbar-left(role="search")
 						.form-group
-							input.form-control(type="text", placeholder="哪有...", autocomplete="off")
-							button.btn.btn-default(type="submit") 搜索
+							input#keyWord.form-control(type="text", placeholder="哪有...", autocomplete="off")
+							button#goSearch.btn.btn-default 搜索
 
 						a.btn.btn-default(href="/addquestion", role="button") 我要提问
 

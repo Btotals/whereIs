@@ -40,5 +40,13 @@ Template.layout.helpers {
 		return (items.join '/') is '/browse/other/unsolved' or (items.join '/') is '/browse/other/solved'
 }
 
+Template.layout.events {
+	'click #goSearch': (e, t) !->
+		keyWord = $ '#keyWord' .val!
+		if !keyWord
+			return
+		Router.go('/search/'+keyWord+'/unsolved/1')
+}
+
 # Template.layout.onRendered !->
 # 	$ '.ui.dropdown' .dropdown!

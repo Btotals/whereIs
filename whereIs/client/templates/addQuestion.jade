@@ -8,24 +8,16 @@ template(name="addQuestion")
 						form.addmargintop2(role="form", action="/addquestion", method="post")
 							div.form-group.col-md-8.resetwidth4
 								label 题目
-								input.form-control(name="questionTitle" placeholder="大学城哪有...",required)
+								input#title.form-control(name="questionTitle" placeholder="大学城哪有...",required)
 							div.form-group.col-md-8.resetwidth4
 								label 描述
 								textarea.form-control(rows="3" name="questionContent" placeholder="大学城哪有...",required)
-							div.form-group.col-md-12.resetwidth4
+							div.form-group.button-group.col-md-12.resetwidth4
 								label.col-md-12 问题分类
-								label.radio-inline
-									input(type="radio" name="questionCategory" value="eatCloth")
-									| 衣食
-								label.radio-inline
-									input(type="radio" name="questionCategory" value="liveWalk")
-									| 住行
-								label.radio-inline
-									input(type="radio" name="questionCategory" value="study")
-									| 学习
-								label.radio-inline
-									input(type="radio" name="questionCategory" value="other", checked)
-									| 其他
+								button.bts.button.sort(id="clothEat" type="button" value="clothEat") 衣食
+								button.bts.button.sort(id="liveWalk" type="button" value="liveWalk") 住行
+								button.bts.button.sort(id="study" type="button" value="study") 学习
+								button.bts.button.sort(id="other" type="button" value="other") 其他
 							div.form-group.col-md-2.resetwidth4
 								label.pull-right score
 									select.form-control(name="questionReward",required)
@@ -36,3 +28,4 @@ template(name="addQuestion")
 										option 100
 							div.form-group.col-md-12
 								input.pull-right.btn.btn-warning(type="submit", value="Submit")
+
