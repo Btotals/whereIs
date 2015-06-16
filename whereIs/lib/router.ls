@@ -47,13 +47,15 @@ Router.route '/browse/:_category/solved/:_page', (eee) !->
 	itemMax = itemPerPage*(parseInt this.params._page)-1
 
 	solvedQues = Questions.find {category: this.params._category, isHandled: true}, {skip: itemMin, limit: itemPerPage}
+	size = Questions.find {category: this.params._category, isHandled: true} .count!
 
 	if solvedQues.count! is 0
 		solvedQues = 0
 
 	this.render 'solvedBrowse', {
 		data: -> {
-			solvedQuestions: solvedQues
+			solvedQuestions: solvedQues,
+			size: size
 		}
 	}
 
@@ -63,26 +65,47 @@ Router.route '/browse/:_category/unsolved/:_page', (eee) !->
 	itemMax = itemPerPage*(parseInt this.params._page)-1
 
 	unsolvedQues = Questions.find {category: this.params._category, isHandled: false}, {skip: itemMin, limit: itemPerPage}
+	size = Questions.find {category: this.params._category, isHandled: false} .count!
 
 	if unsolvedQues.count! is 0
 		unsolvedQues = 0
 
 	this.render 'unsolvedBrowse', {
 		data: -> {
-			unsolvedQuestions: unsolvedQues
+			unsolvedQuestions: unsolvedQues,
+			size: size
 		}
 	}
 
-Router.route '/search/:_keyword', (eee) !->
-	results = searchByKeyword this.params._keyword
-	this.render 'searchResults', {
+Router.route '/search/:_keyword/solved/:_page', (eee) !->
+	results = searchByKeyword this.params._keyword, true, this.params._page
+	size = Questions.find {title:{$regex: this.params._keyword}, isHandled:true} .count!
+	this.render 'searchSolved', {
 		data: -> {
-			Questions: results
+			Questions: results,
+			size: size
 		}
 	}
 
-searchByKeyword = (keyword) ->
-	0
+Router.route '/search/:_keyword/unsolved/:_page', (eee) !->
+	results = searchByKeyword this.params._keyword, false, this.params._page
+	size = Questions.find {title:{$regex: this.params._keyword}, isHandled:false} .count!
+	this.render 'searchUnsolved', {
+		data: -> {
+			Questions: results,
+			size: size
+		}
+	}
+
+searchByKeyword = (keyword, solved, page) ->
+	itemPerPage = 2
+	itemMin = itemPerPage*((parseInt page)-1)
+	itemMax = itemPerPage*(parseInt page)-1
+
+	if solved
+		return Questions.find {title:{$regex:keyword}, isHandled:true}, {skip: itemMin, limit: itemPerPage}
+	else
+		return Questions.find {title:{$regex:keyword}, isHandled:false}, {skip: itemMin, limit: itemPerPage}
 
 requireLogin = (e)!->
 	if !Meteor.user!
